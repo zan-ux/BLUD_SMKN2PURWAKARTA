@@ -98,7 +98,7 @@
             
             <!-- Image Side -->
             <div class="relative">
-                <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" alt="Gedung" class="rounded-2xl shadow-xl w-full h-[500px] object-cover">
+                <img src="{{ asset('storage/'.$top->photo) }}" alt="Kepsek" class="rounded-2xl shadow-xl w-full h-[500px] object-cover">
                 <div class="absolute bottom-8 left-8 bg-white/90 backdrop-blur p-6 rounded-2xl shadow-lg max-w-xs">
                     <div class="text-xs font-bold text-green-800 uppercase tracking-wider mb-2">Sinergi</div>
                     <p class="font-semibold text-gray-900 leading-snug">Membangun ekosistem vokasi yang mandiri.</p>

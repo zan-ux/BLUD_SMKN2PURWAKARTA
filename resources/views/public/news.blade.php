@@ -6,7 +6,9 @@
 <!-- Hero -->
 <section class="bg-white pt-16 pb-8">
     <div class="container mx-auto px-4">
-        <div class="text-sm font-semibold text-green-800 uppercase tracking-wider mb-2">Sorotan Utama</div>
+        <div data-aos="fade-up">
+            <div class="text-sm font-semibold text-green-800 uppercase tracking-wider mb-2">Sorotan Utama</div>
+        </div>
     </div>
 </section>
 
@@ -14,19 +16,25 @@
 @if($featuredNews)
 <section class="bg-white pb-16">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-gray-50 rounded-2xl p-8 lg:p-12">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center bg-gray-50 rounded-2xl p-8 lg:p-12" data-aos="fade-up">
             <div>
                 <div class="flex gap-3 mb-4">
                     <span class="bg-yellow-500 text-green-950 text-xs font-bold px-3 py-1 rounded-full">Sorotan Utama</span>
                     <span class="text-sm text-gray-500 pt-1">{{ $featuredNews->published_at->format('d M Y') }}</span>
                 </div>
-                <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6 leading-tight">{{ $featuredNews->title }}</h1>
-                <p class="text-gray-600 mb-8 leading-relaxed">{{ $featuredNews->excerpt }}</p>
-                <a href="{{ route('public.news.show', $featuredNews->slug) }}" class="bg-green-900 text-white font-semibold px-8 py-3 rounded-full hover:bg-green-800 transition">
-                    Baca Selengkapnya →
-                </a>
+                <div data-aos="fade-up" data-aos-delay="100">
+                    <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6 leading-tight">{{ $featuredNews->title }}</h1>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="200">
+                    <p class="text-gray-600 mb-8 leading-relaxed">{{ $featuredNews->excerpt }}</p>
+                </div>
+                <div data-aos="fade-up" data-aos-delay="300">
+                    <a href="{{ route('public.news.show', $featuredNews->slug) }}" class="bg-green-900 text-white font-semibold px-8 py-3 rounded-full hover:bg-green-800 transition">
+                        Baca Selengkapnya →
+                    </a>
+                </div>
             </div>
-            <div class="relative h-96">
+            <div class="relative h-96" data-aos="fade-left" data-aos-delay="200">
                 @if($featuredNews->image)
                     <img src="{{ asset('storage/'.$featuredNews->image) }}" alt="{{ $featuredNews->title }}" class="w-full h-full object-cover rounded-2xl shadow-lg">
                 @else
@@ -43,12 +51,14 @@
 <!-- Latest News Grid -->
 <section class="py-16 bg-gray-50">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-3xl font-bold text-gray-900 mb-2">Berita Terbaru</h2>
-        <p class="text-gray-500 mb-12">Informasi dan kegiatan terkini seputar BLUD SMKN 2 Purwakarta</p>
+        <div data-aos="fade-up">
+            <h2 class="text-3xl font-bold text-gray-900 mb-2">Berita Terbaru</h2>
+            <p class="text-gray-500 mb-12">Informasi dan kegiatan terkini seputar BLUD SMKN 2 Purwakarta</p>
+        </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @forelse($news as $item)
-            <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition group cursor-pointer" onclick="window.location='{{ route('public.news.show', $item->slug) }}'">
+            <article class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition group cursor-pointer" onclick="window.location='{{ route('public.news.show', $item->slug) }}'" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                 <div class="h-56 overflow-hidden">
                     @if($item->image)
                         <img src="{{ asset('storage/'.$item->image) }}" alt="{{ $item->title }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
@@ -66,11 +76,11 @@
                 </div>
             </article>
             @empty
-            <div class="col-span-3 text-center py-20 text-gray-500">Belum ada berita.</div>
+            <div class="col-span-3 text-center py-20 text-gray-500" data-aos="fade-up">Belum ada berita.</div>
             @endforelse
         </div>
         
-        <div class="mt-12 text-center">
+        <div class="mt-12 text-center" data-aos="fade-up">
             {{ $news->links() }}
         </div>
     </div>

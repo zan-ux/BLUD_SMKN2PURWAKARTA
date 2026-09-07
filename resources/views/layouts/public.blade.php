@@ -33,6 +33,9 @@
         }
     </script>
     
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     @stack('styles')
 </head>
 <body class="font-sans bg-gray-50 text-gray-800 antialiased">
@@ -50,6 +53,20 @@
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" defer></script>
+    
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        // Inisialisasi AOS
+        AOS.init({
+            duration: 800,           // Durasi animasi dalam milidetik
+            easing: 'ease-in-out',   // Jenis easing
+            once: true,              // Animasi hanya berjalan sekali
+            offset: 50,              // Jarak dari viewport sebelum animasi dimulai
+            delay: 0,                // Delay default sebelum animasi
+        });
+    </script>
+    
     @stack('scripts')
 </body>
 </html>

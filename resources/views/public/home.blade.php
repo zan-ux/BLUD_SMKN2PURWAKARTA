@@ -3,15 +3,13 @@
 @section('title', 'Beranda - BLUD SMKN 2 Purwakarta')
 
 @section('content')
+@php
+    $profile = \App\Models\Profile::first();
+@endphp
+
 <!-- Hero Section -->
 <section class="relative bg-green-950 text-white overflow-hidden">
     <div class="absolute inset-0">
-        <!-- Ganti dengan image gedung sekolah -->
-
-        @php
-            $profile = \App\Models\Profile::first();
-        @endphp
-
         @if($profile && $profile->foto_sejarah)
             <img src="{{ asset('storage/'.$profile->foto_sejarah) }}" alt="Gedung" class="w-full h-full object-cover opacity-20">
         @else
@@ -20,23 +18,34 @@
     </div>
     <div class="relative container mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32">
         <div class="max-w-2xl">
-            <div class="inline-flex items-center gap-2 bg-green-900/50 backdrop-blur px-4 py-2 rounded-full mb-6 text-sm">
-                <span class="w-2 h-2 bg-yellow-400 rounded-full"></span>
-                Badan Layanan Umum Daerah
+            <div data-aos="fade-up" data-aos-delay="100">
+                <div class="inline-flex items-center gap-2 bg-green-900/50 backdrop-blur px-4 py-2 rounded-full mb-6 text-sm">
+                    <span class="w-2 h-2 bg-yellow-400 rounded-full"></span>
+                    Badan Layanan Umum Daerah
+                </div>
             </div>
-            <h1 class="text-4xl lg:text-6xl font-extrabold leading-tight mb-6">
-                Layanan Warga, Satu Langkah Lebih Dekat
-            </h1>
-            <p class="text-lg text-green-100 mb-10 max-w-xl">
-                Menyediakan layanan publik yang profesional, transparan, dan inovatif melalui optimalisasi potensi vokasi SMKN 2 Purwakarta.
-            </p>
-            <div class="flex flex-wrap gap-4">
-                <a href="{{ route('public.services') }}" class="bg-yellow-500 hover:bg-yellow-400 text-green-950 font-semibold px-8 py-3 rounded-full transition">
-                    Jelajahi Layanan
-                </a>
-                <a href="{{ route('public.profile') }}" class="bg-white/10 hover:bg-white/20 backdrop-blur px-8 py-3 rounded-full transition">
-                    Profil Kami
-                </a>
+            
+            <div data-aos="fade-up" data-aos-delay="200">
+                <h1 class="text-4xl lg:text-6xl font-extrabold leading-tight mb-6">
+                    Layanan Warga, Satu Langkah Lebih Dekat
+                </h1>
+            </div>
+            
+            <div data-aos="fade-up" data-aos-delay="300">
+                <p class="text-lg text-green-100 mb-10 max-w-xl">
+                    Menyediakan layanan publik yang profesional, transparan, dan inovatif melalui optimalisasi potensi vokasi SMKN 2 Purwakarta.
+                </p>
+            </div>
+            
+            <div data-aos="fade-up" data-aos-delay="400">
+                <div class="flex flex-wrap gap-4">
+                    <a href="{{ route('public.services') }}" class="bg-yellow-500 hover:bg-yellow-400 text-green-950 font-semibold px-8 py-3 rounded-full transition">
+                        Jelajahi Layanan
+                    </a>
+                    <a href="{{ route('public.profile') }}" class="bg-white/10 hover:bg-white/20 backdrop-blur px-8 py-3 rounded-full transition">
+                        Profil Kami
+                    </a>
+                </div>
             </div>
         </div>
     </div>
@@ -46,11 +55,18 @@
 <section class="py-20 bg-white">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div class="relative">
-                <div class="absolute -top-6 -left-6 w-24 h-24 bg-yellow-400 rounded-full opacity-20 z-0"></div>
-                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Sekolah" class="relative z-10 rounded-2xl shadow-2xl w-full h-[400px] object-cover">
+            <div data-aos="fade-right">
+                <div class="relative">
+                    <div class="absolute -top-6 -left-6 w-24 h-24 bg-yellow-400 rounded-full opacity-20 z-0"></div>
+                    @if($profile && $profile->foto_sejarah)
+                        <img src="{{ asset('storage/'.$profile->foto_sejarah) }}" alt="Sekolah" class="relative z-10 rounded-2xl shadow-2xl w-full h-[400px] object-cover">
+                    @else
+                        <img src="{{ asset('images/sekolah.jpg') }}" alt="Sekolah" class="relative z-10 rounded-2xl shadow-2xl w-full h-[400px] object-cover">
+                    @endif
+                </div>
             </div>
-            <div>
+            
+            <div data-aos="fade-left" data-aos-delay="200">
                 <div class="text-sm font-semibold text-green-800 uppercase tracking-wider mb-4">Tentang BLUD</div>
                 <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 mb-6 leading-tight">
                     Membangun Kemandirian Melalui Inovasi Vokasi
@@ -85,16 +101,16 @@
 <section class="py-20 bg-gray-50">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-end mb-12">
-            <div>
+            <div data-aos="fade-up">
                 <div class="text-sm font-semibold text-green-800 uppercase tracking-wider mb-4">Layanan Unggulan</div>
                 <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">Fasilitas & Layanan Publik Terbaik</h2>
             </div>
-            <a href="{{ route('public.services') }}" class="hidden md:block bg-white border border-gray-200 text-gray-700 px-6 py-3 rounded-full hover:border-green-800 hover:text-green-800 transition">Lihat Semua Layanan</a>
+            <a href="{{ route('public.services') }}" class="hidden md:block bg-white border border-gray-200 text-gray-700 px-6 py-3 rounded-full hover:border-green-800 hover:text-green-800 transition" data-aos="fade-left">Lihat Semua Layanan</a>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             @foreach($services as $service)
-            <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition group">
+            <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition group" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                 <div class="relative h-48 overflow-hidden">
                     @if($service->image)
                         <img src="{{ asset('storage/'.$service->image) }}" alt="{{ $service->name }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
@@ -120,16 +136,16 @@
 <section class="py-20 bg-white">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-end mb-12">
-            <div>
+            <div data-aos="fade-up">
                 <div class="text-sm font-semibold text-green-800 uppercase tracking-wider mb-4">Kabar & Informasi</div>
                 <h2 class="text-3xl lg:text-4xl font-bold text-gray-900">Berita Terbaru BLUD</h2>
             </div>
-            <a href="{{ route('public.news') }}" class="hidden md:block text-green-800 font-semibold hover:text-green-600">Lihat Semua Berita →</a>
+            <a href="{{ route('public.news') }}" class="hidden md:block text-green-800 font-semibold hover:text-green-600" data-aos="fade-left">Lihat Semua Berita →</a>
         </div>
         
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             @foreach($latestNews as $news)
-            <article class="group cursor-pointer" onclick="window.location='{{ route('public.news.show', $news->slug) }}'">
+            <article class="group cursor-pointer" onclick="window.location='{{ route('public.news.show', $news->slug) }}'" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                 <div class="rounded-xl overflow-hidden mb-4 relative">
                     @if($news->image)
                         <img src="{{ asset('storage/'.$news->image) }}" alt="{{ $news->title }}" class="w-full h-56 object-cover group-hover:scale-110 transition duration-300">
@@ -153,7 +169,7 @@
 <!-- Lokasi / Peta -->
 <section class="py-20 bg-gray-50">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col lg:flex-row">
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden flex flex-col lg:flex-row" data-aos="fade-up">
             <div class="p-10 lg:w-1/3 bg-green-950 text-white flex flex-col justify-between">
                 <div>
                     <h3 class="text-2xl font-bold mb-4">Kunjungi Kami</h3>

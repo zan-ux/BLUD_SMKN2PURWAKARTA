@@ -39,7 +39,7 @@ class UserController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => ['required', 'confirmed', Password::min(8)],
-            'role' => 'required|in:admin,staff,viewer',
+            'role' => 'required|in:admin,viewer',
             'phone' => 'nullable|string|max:20',
         ]);
 
@@ -66,7 +66,7 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $user->id,
-            'role' => 'required|in:admin,staff,viewer',
+            'role' => 'required|in:admin,viewer',
             'phone' => 'nullable|string|max:20',
             'password' => 'nullable|confirmed|min:8',
         ]);
@@ -110,7 +110,7 @@ class UserController extends Controller
     public function updateRole(Request $request, User $user)
     {
         $request->validate([
-            'role' => 'required|in:admin,staff,viewer',
+            'role' => 'required|in:admin,viewer',
         ]);
 
         $user->update(['role' => $request->role]);

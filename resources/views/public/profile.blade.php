@@ -6,11 +6,15 @@
 <!-- Hero Small -->
 <section class="bg-green-950 text-white py-16">
     <div class="container mx-auto px-4 text-center">
-        <div class="inline-flex items-center gap-2 bg-green-900/50 px-4 py-2 rounded-full mb-4 text-xs font-semibold uppercase tracking-wider">
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"></path></svg>
-            Profil BLUD
+        <div data-aos="fade-up">
+            <div class="inline-flex items-center gap-2 bg-green-900/50 px-4 py-2 rounded-full mb-4 text-xs font-semibold uppercase tracking-wider">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 21v-4m0 0V5a2 2 0 012-2h6.5l1 1H21l-3 6 3 6h-8.5l-1-1H5a2 2 0 00-2 2zm9-13.5V9"></path></svg>
+                Profil BLUD
+            </div>
         </div>
-        <h1 class="text-3xl lg:text-4xl font-bold">Profil {{ $profile->institution_name ?? 'BLUD' }}</h1>
+        <div data-aos="fade-up" data-aos-delay="100">
+            <h1 class="text-3xl lg:text-4xl font-bold">Profil {{ $profile->institution_name ?? 'BLUD' }}</h1>
+        </div>
     </div>
 </section>
 
@@ -18,7 +22,7 @@
 <section class="py-20 bg-white">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-            <div>
+            <div data-aos="fade-right">
                 <div class="text-sm font-semibold text-green-800 uppercase tracking-wider mb-4">Sejarah Institusi</div>
                 <h2 class="text-3xl font-bold text-gray-900 mb-6">Melangkah Maju Sejak {{ $profile->established_year ?? '2005' }}</h2>
                 <div class="prose prose-green max-w-none text-gray-600 leading-relaxed">
@@ -27,7 +31,7 @@
                     </p>
                 </div>
             </div>
-            <div class="relative">
+            <div class="relative" data-aos="fade-left" data-aos-delay="200">
                 <div class="absolute -top-4 -right-4 w-full h-full bg-green-100 rounded-2xl"></div>
                 <div class="relative rounded-2xl shadow-xl w-full h-[400px] overflow-hidden">
                     @if($profile->foto_sejarah)
@@ -48,7 +52,7 @@
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <!-- Visi -->
-            <div class="bg-green-950 text-white rounded-2xl p-10 flex flex-col justify-between h-[400px]">
+            <div class="bg-green-950 text-white rounded-2xl p-10 flex flex-col justify-between h-[400px]" data-aos="fade-up">
                 <div class="text-sm font-semibold text-yellow-400 uppercase tracking-wider mb-4">Visi Kami</div>
                 <div class="text-2xl font-bold leading-relaxed mb-8">
                     "{{ $profile->vision ?? 'Belum ada visi.' }}"
@@ -61,7 +65,7 @@
             </div>
             
             <!-- Misi -->
-            <div class="bg-white rounded-2xl p-10">
+            <div class="bg-white rounded-2xl p-10" data-aos="fade-up" data-aos-delay="200">
                 <div class="text-sm font-semibold text-green-800 uppercase tracking-wider mb-4">Misi Institusi</div>
                 <div class="space-y-6">
                     @if($profile->mission)
@@ -83,7 +87,7 @@
 <!-- Sambutan Kepala Sekolah -->
 <section class="py-20 bg-white">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-gray-50 rounded-2xl p-8 lg:p-12 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
+        <div class="bg-gray-50 rounded-2xl p-8 lg:p-12 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center" data-aos="fade-up">
             <div class="lg:col-span-1">
                 <div class="w-full h-72 rounded-xl overflow-hidden shadow-lg">
                     @if($profile->foto_sambutan)
@@ -115,7 +119,7 @@
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             <!-- Akreditasi -->
-            <div class="bg-white p-10 rounded-2xl">
+            <div class="bg-white p-10 rounded-2xl" data-aos="fade-up">
                 <div class="flex items-center gap-3 mb-8">
                     <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-800">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -132,7 +136,7 @@
             </div>
             
             <!-- Legalitas -->
-            <div class="bg-white p-10 rounded-2xl">
+            <div class="bg-white p-10 rounded-2xl" data-aos="fade-up" data-aos-delay="200">
                 <div class="flex items-center gap-3 mb-8">
                     <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-800">
                         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
@@ -167,7 +171,7 @@
 <!-- Kontak Kami -->
 <section class="py-20 bg-white">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-green-950 rounded-2xl p-10 lg:p-14 flex flex-col lg:flex-row justify-between items-center gap-8">
+        <div class="bg-green-950 rounded-2xl p-10 lg:p-14 flex flex-col lg:flex-row justify-between items-center gap-8" data-aos="fade-up">
             <div class="max-w-xl">
                 <h2 class="text-3xl font-bold text-white mb-4">Hubungi Kami</h2>
                 <p class="text-green-200 leading-relaxed mb-6">

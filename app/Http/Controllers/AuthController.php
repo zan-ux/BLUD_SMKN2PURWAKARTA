@@ -7,8 +7,8 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
 use Illuminate\Support\Facades\Password;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Auth\Events\PasswordReset;
 use Illuminate\Support\Str;
 
@@ -93,13 +93,20 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'phone' => $request->phone,
-            'role' => 'viewer', // default role untuk user yang register
+            'role' => 'viewer',
         ]);
 
         Auth::login($user);
 
-        // User biasa diarahkan ke halaman publik
         return redirect()->route('home')
             ->with('success', 'Registrasi berhasil! Selamat datang.');
     }
+
+    // ==================== FORGOT PASSWORD ====================
+    
+    public function showForgotPasswordForm()
+{
+    $profile = \App\Models\Profile::first();
+    return view('auth.forgot-password', compact('profile'));
+}
 }

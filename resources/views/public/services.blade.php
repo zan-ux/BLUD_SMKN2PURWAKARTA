@@ -3,23 +3,31 @@
 @section('title', 'Layanan - BLUD SMKN 2 Purwakarta')
 
 @section('content')
-<!-- Hero -->
+<!-- Hero Section -->
 <section class="bg-gradient-to-r from-green-950 to-green-900 text-white py-20">
     <div class="container mx-auto px-4">
-        <div class="text-sm font-semibold text-yellow-400 uppercase tracking-wider mb-4">Portofolio Layanan</div>
-        <h1 class="text-4xl lg:text-5xl font-bold mb-6">Solusi Profesional Berbasis Vokasi</h1>
-        <p class="text-lg text-green-100 max-w-2xl leading-relaxed">
-            Badan Layanan Umum Daerah (BLUD) SMKN 2 Purwakarta menghadirkan produk dan layanan berkualitas tinggi yang dikelola secara profesional, mandiri, dan berorientasi pada kepuasan masyarakat.
-        </p>
+        <div data-aos="fade-up">
+            <div class="text-sm font-semibold text-yellow-400 uppercase tracking-wider mb-4">Portofolio Layanan</div>
+        </div>
+        <div data-aos="fade-up" data-aos-delay="100">
+            <h1 class="text-4xl lg:text-5xl font-bold mb-6">Solusi Profesional Berbasis Vokasi</h1>
+        </div>
+        <div data-aos="fade-up" data-aos-delay="200">
+            <p class="text-lg text-green-100 max-w-2xl leading-relaxed">
+                Badan Layanan Umum Daerah (BLUD) SMKN 2 Purwakarta menghadirkan produk dan layanan berkualitas tinggi yang dikelola secara profesional, mandiri, dan berorientasi pada kepuasan masyarakat.
+            </p>
+        </div>
         
-        <div class="mt-8 flex gap-8">
-            <div class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl">
-                <div class="text-3xl font-bold">{{ $services->total() }}+</div>
-                <div class="text-sm text-green-200">Pilar Layanan</div>
-            </div>
-            <div class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl">
-                <div class="text-3xl font-bold">100%</div>
-                <div class="text-sm text-green-200">Dukungan Siswa</div>
+        <div data-aos="fade-up" data-aos-delay="300">
+            <div class="mt-8 flex gap-8">
+                <div class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl">
+                    <div class="text-3xl font-bold">{{ $services->total() }}+</div>
+                    <div class="text-sm text-green-200">Pilar Layanan</div>
+                </div>
+                <div class="bg-white/10 backdrop-blur px-6 py-4 rounded-xl">
+                    <div class="text-3xl font-bold">100%</div>
+                    <div class="text-sm text-green-200">Dukungan Siswa</div>
+                </div>
             </div>
         </div>
     </div>
@@ -30,7 +38,7 @@
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             @forelse($services as $service)
-            <div class="bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-xl transition group">
+            <div class="bg-white border border-gray-100 rounded-2xl overflow-hidden hover:shadow-xl transition group" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                 <div class="h-56 overflow-hidden bg-gray-50">
                     @if($service->image)
                         <img src="{{ asset('storage/'.$service->image) }}" alt="{{ $service->name }}" class="w-full h-full object-cover group-hover:scale-110 transition duration-300">
@@ -46,6 +54,11 @@
                     
                     <div class="flex items-center justify-between">
                         <div class="text-sm font-semibold text-green-800">
+                            @if($service->price > 0)
+                                {{ $service->price_formatted }}
+                            @else
+                                Hubungi Kami
+                            @endif
                         </div>
                         <a href="{{ route('public.services.show', $service->id) }}" class="inline-flex items-center gap-2 text-sm font-semibold text-gray-700 hover:text-green-800 transition">
                             Selengkapnya
@@ -55,7 +68,7 @@
                 </div>
             </div>
             @empty
-            <div class="col-span-3 text-center py-20 text-gray-500">
+            <div class="col-span-3 text-center py-20 text-gray-500" data-aos="fade-up">
                 Belum ada layanan yang tersedia.
             </div>
             @endforelse
@@ -66,7 +79,7 @@
 <!-- CTA Section -->
 <section class="py-20 bg-green-950">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-green-900 rounded-2xl p-10 lg:p-14 flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div class="bg-green-900 rounded-2xl p-10 lg:p-14 flex flex-col lg:flex-row items-center justify-between gap-8" data-aos="fade-up">
             <div class="max-w-xl">
                 <h2 class="text-3xl font-bold text-white mb-4">Butuh Layanan Kustom?</h2>
                 <p class="text-green-200 leading-relaxed">

@@ -8,7 +8,7 @@
     <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
         <div>
             <h1 class="text-3xl font-bold text-gray-900 mb-2">Manajemen User</h1>
-            <p class="text-gray-500">Kelola akun admin, staff, dan pengguna lainnya.</p>
+            <p class="text-gray-500">Kelola akun admin, dan pengguna lainnya.</p>
         </div>
         <a href="{{ route('admin.users.create') }}" class="mt-4 md:mt-0 inline-flex items-center gap-2 bg-green-900 text-white px-6 py-3 rounded-lg hover:bg-green-800 transition">
             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path></svg>
@@ -27,7 +27,6 @@
             <select class="bg-gray-50 border border-gray-200 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-green-800">
                 <option value="">Semua</option>
                 <option value="admin">Admin</option>
-                <option value="staff">Staff</option>
                 <option value="viewer">Viewer</option>
             </select>
         </div>
@@ -62,7 +61,7 @@
                         </td>
                         <td class="px-6 py-4">
                             <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold 
-                                {{ $user->role === 'admin' ? 'bg-green-100 text-green-800' : ($user->role === 'staff' ? 'bg-yellow-100 text-yellow-800' : 'bg-gray-100 text-gray-600') }}">
+                                {{ $user->role === 'admin' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-600' }}">
                                 {{ ucfirst($user->role) }}
                             </span>
                         </td>

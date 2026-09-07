@@ -14,6 +14,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\AdminAccountController;
+use App\Http\Controllers\GoogleAuthController;
 
 // ==================== PUBLIC ROUTES ====================
 Route::get('/', [PublicController::class, 'home'])->name('home');
@@ -30,6 +31,10 @@ Route::get('/kontak', [ContactMessageController::class, 'showContactForm'])->nam
 Route::post('/kontak', [ContactMessageController::class, 'store'])->name('public.contact.store');
 
 // ==================== AUTH ROUTES ====================
+Route::get('/auth/google', [GoogleAuthController::class, 'redirect'])->name('auth.google');
+Route::get('/auth/google/callback', [GoogleAuthController::class, 'callback'])->name('auth.google.callback');
+Route::get('/google/complete-profile', [GoogleAuthController::class, 'showCompleteProfile'])->name('google.complete-profile');
+Route::post('/google/complete-profile', [GoogleAuthController::class, 'completeProfile'])->name('google.complete-profile.store');
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
@@ -37,10 +42,7 @@ Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('regi
 Route::post('/register', [AuthController::class, 'register']);
 
 // Password Reset Routes
-Route::get('/forgot-password', [AuthController::class, 'showForgotPasswordForm'])->name('password.request');
-Route::post('/forgot-password', [AuthController::class, 'sendResetLink'])->name('password.email');
-Route::get('/reset-password/{token}', [AuthController::class, 'showResetForm'])->name('password.reset');
-Route::post('/reset-password', [AuthController::class, 'reset'])->name('password.update');
+Route::get('/lupa-password', [AuthController::class, 'showForgotPasswordForm'])->name('password.request');
 
 // ==================== ADMIN ROUTES ====================
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
@@ -80,4 +82,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // Activity Logs
     Route::resource('activity-logs', ActivityLogController::class);
     Route::delete('/activity-logs/clear', [ActivityLogController::class, 'clear'])->name('activity-logs.clear');
+
+
 });

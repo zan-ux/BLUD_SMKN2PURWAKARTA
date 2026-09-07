@@ -58,7 +58,6 @@
                 <label class="block text-sm font-medium text-gray-700 mb-2">Role</label>
                 <select name="role" required class="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-green-800 focus:ring-1 focus:ring-green-800">
                     <option value="viewer">Viewer (User Biasa)</option>
-                    <option value="staff">Staff</option>
                     <option value="admin">Admin</option>
                 </select>
             </div>

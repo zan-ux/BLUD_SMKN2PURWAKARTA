@@ -19,6 +19,7 @@ class User extends Authenticatable
         'role',
         'phone',
         'avatar',
+        'google_id',
         'is_active',
     ];
 
@@ -47,21 +48,5 @@ class User extends Authenticatable
     public function hasRole($role)
     {
         return $this->role === $role;
-    }
-
-    // Relationships
-    public function profile()
-    {
-        return $this->hasOne(Profile::class);
-    }
-
-    public function news()
-    {
-        return $this->hasMany(News::class, 'created_by');
-    }
-
-    public function activityLogs()
-    {
-        return $this->hasMany(ActivityLog::class);
     }
 }

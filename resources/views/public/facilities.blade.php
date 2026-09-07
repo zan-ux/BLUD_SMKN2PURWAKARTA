@@ -6,15 +6,17 @@
 <!-- Hero -->
 <section class="bg-gray-50 py-16">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-sm font-semibold text-green-800 uppercase tracking-wider mb-4">Layanan BLUD</div>
+        <div data-aos="fade-up">
+            <div class="text-sm font-semibold text-green-800 uppercase tracking-wider mb-4">Layanan BLUD</div>
+        </div>
         <div class="flex flex-col lg:flex-row justify-between items-start lg:items-end gap-8">
-            <div>
+            <div data-aos="fade-up" data-aos-delay="100">
                 <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Fasilitas Publik<br>Unggulan</h1>
                 <p class="text-gray-600 max-w-xl leading-relaxed">
                     SMKN 2 Purwakarta melalui tata kelola BLUD menyewakan berbagai fasilitas standar industri dan profesional untuk mendukung kegiatan masyarakat, instansi, maupun dunia usaha.
                 </p>
             </div>
-            <div class="bg-white p-6 rounded-2xl shadow-sm flex items-center gap-8">
+            <div class="bg-white p-6 rounded-2xl shadow-sm flex items-center gap-8" data-aos="fade-up" data-aos-delay="200">
                 <div class="text-center">
                     <div class="text-3xl font-bold text-green-800">{{ $facilities->total() }}+</div>
                     <div class="text-sm text-gray-500">Fasilitas Utama</div>
@@ -33,7 +35,7 @@
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             @forelse($facilities as $facility)
-            <div class="relative group rounded-2xl overflow-hidden h-72 cursor-pointer">
+            <div class="relative group rounded-2xl overflow-hidden h-72 cursor-pointer" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
                 @if($facility->image)
                     <img src="{{ asset('storage/'.$facility->image) }}" alt="{{ $facility->name }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition duration-300">
                 @else
@@ -49,7 +51,7 @@
                 <span class="absolute top-4 right-4 bg-white/20 backdrop-blur text-white text-xs font-semibold px-3 py-1 rounded-full">{{ $facility->status_label }}</span>
             </div>
             @empty
-            <div class="col-span-3 text-center py-20 text-gray-500">
+            <div class="col-span-3 text-center py-20 text-gray-500" data-aos="fade-up">
                 Belum ada fasilitas yang tersedia.
             </div>
             @endforelse
@@ -60,7 +62,7 @@
 <!-- CTA Reservation -->
 <section class="py-20 bg-gray-50">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-green-950 rounded-2xl p-10 lg:p-14 flex flex-col lg:flex-row justify-between items-center gap-8">
+        <div class="bg-green-950 rounded-2xl p-10 lg:p-14 flex flex-col lg:flex-row justify-between items-center gap-8" data-aos="fade-up">
             <div class="max-w-xl">
                 <h2 class="text-3xl font-bold text-white mb-4">Mulai Rencanakan Acara Anda</h2>
                 <p class="text-green-200 leading-relaxed mb-6">
