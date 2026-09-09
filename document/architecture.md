@@ -65,7 +65,7 @@ c:\Users\zanrp\BLUDSMEKDA\
 ├── database/                         # Migrasi, Seeder, dan Factory
 │   ├── migrations/                  # 18 berkas migrasi skema tabel
 │   └── seeders/                     # Seeder data awal instansi & admin demo
-├── document/                         # 📚 Dokumentasi teknis modular sistem (Folder ini)
+├── document/                         #  Dokumentasi teknis modular sistem (Folder ini)
 │   ├── README.md                    # Indeks & peta navigasi dokumen
 │   ├── api.md                       # Spesifikasi API eksternal & internal
 │   ├── architecture.md              # Arsitektur sistem & struktur kode

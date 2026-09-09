@@ -43,7 +43,7 @@ graph TD
 
 ---
 
-## 🚀 2. Alur Integrasi Google OAuth 2.0 (SSO)
+##  2. Alur Integrasi Google OAuth 2.0 (SSO)
 
 Pengelolaan Google SSO ditangani secara modular oleh `App\Http\Controllers\GoogleAuthController`:
 
@@ -73,7 +73,7 @@ Google mengembalikan `code` otorisasi ke URL redirect `http://localhost:8000/aut
 
 ---
 
-## 🔑 3. Alur Autentikasi Tradisional (Lokal)
+##  3. Alur Autentikasi Tradisional (Lokal)
 
 Pengelolaan autentikasi manual ditangani oleh `App\Http\Controllers\AuthController`:
 
@@ -98,18 +98,18 @@ Pengelolaan autentikasi manual ditangani oleh `App\Http\Controllers\AuthControll
 
 ---
 
-## 👥 4. Role-Based Access Control (RBAC)
+##  4. Role-Based Access Control (RBAC)
 
 Sistem menerapkan dua level hak akses (*Role*):
 
 | Peran (Role) | Hak Akses Portal Publik | Hak Akses Dashboard Admin | Fitur Khusus |
 |---|:---:|:---:|---|
-| **`admin`** | ✅ Ya | ✅ Ya (`/admin/*`) | Akses penuh: Kelola profil BLUD, CRUD layanan, fasilitas, berita, struktur organigram, kelola akun pengguna, ubah role, dan audit log. |
-| **`viewer`** | ✅ Ya | ❌ Ditolak (403 Forbidden) | Mengakses portal informasi publik, membaca berita, melihat katalog layanan/fasilitas, dan mengirimkan pesan kontak. |
+| **`admin`** |  Ya |  Ya (`/admin/*`) | Akses penuh: Kelola profil BLUD, CRUD layanan, fasilitas, berita, struktur organigram, kelola akun pengguna, ubah role, dan audit log. |
+| **`viewer`**|  Ya |  Ditolak (403 Forbidden) | Mengakses portal informasi publik, membaca berita, melihat katalog layanan/fasilitas, dan mengirimkan pesan kontak. |
 
 ---
 
-## 🚧 5. Middleware & Proteksi Keamanan
+##  5. Middleware & Proteksi Keamanan
 
 ### 5.1. `AdminMiddleware` (`app/Http/Middleware/AdminMiddleware.php`)
 Diterapkan pada grup route `/admin/*`. Memeriksa dua kondisi:

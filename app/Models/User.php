@@ -49,4 +49,24 @@ class User extends Authenticatable
     {
         return $this->role === $role;
     }
+        // ==================== RELATIONSHIPS ====================
+    
+    // Relasi ke Profile (One to One)
+    public function profile()
+    {
+        return $this->hasOne(Profile::class);
+    }
+
+    // Relasi ke Berita (One to Many)
+    public function news()
+    {
+        return $this->hasMany(News::class, 'created_by');
+    }
+
+    // Relasi ke Activity Log (One to Many)
+    public function activityLogs()
+    {
+        return $this->hasMany(ActivityLog::class);
+    }
+
 }
