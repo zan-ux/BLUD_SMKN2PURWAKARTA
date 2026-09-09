@@ -368,6 +368,19 @@ Setelah menjalankan `InitialDataSeeder`, Anda dapat login ke panel admin dengan 
 
 ---
 
-##  Lisensi
+## 📚 Dokumentasi Teknis Modular
+
+Untuk panduan teknis yang lebih mendalam dan terpisah per topik, silakan merujuk ke folder [`document/`](file:///c:/Users/zanrp/BLUDSMEKDA/document/README.md):
+
+- 🗄️ **[database.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/database.md)**: Skema tabel, ERD, model Eloquent, migrasi & seeder.
+- 🌐 **[api.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/api.md)**: Integrasi Google OAuth 2.0, Google Maps, & internal AJAX endpoints.
+- 🔐 **[auth.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/auth.md)**: Sistem login tradisional, Google SSO, RBAC & Middleware.
+- 🌟 **[features.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/features.md)**: Spesifikasi rinci seluruh fitur portal publik & panel admin.
+- 🏛️ **[architecture.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/architecture.md)**: Pola MVC, struktur direktori, asset pipeline Vite + Tailwind v4.
+- 🛠️ **[setup.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/setup.md)**: Panduan instalasi step-by-step, Google Cloud Console setup & troubleshooting.
+
+---
+
+## 📄 Lisensi
 
 Proyek ini dikembangkan untuk kebutuhan operasional **Badan Layanan Umum Daerah (BLUD) SMKN 2 Purwakarta** dan dirilis di bawah lisensi [MIT License](LICENSE).
