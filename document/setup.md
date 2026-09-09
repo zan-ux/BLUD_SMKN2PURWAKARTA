@@ -1,10 +1,10 @@
-# 🛠️ Panduan Instalasi & Konfigurasi (Setup) - BLUD SMKN 2 Purwakarta
+#  Panduan Instalasi & Konfigurasi (Setup) - BLUD SMKN 2 Purwakarta
 
 Dokumen ini memuat panduan lengkap langkah demi langkah (*step-by-step*) untuk melakukan instalasi, konfigurasi lingkungan (*environment setup*), konfigurasi Google Cloud Console OAuth, serta pemecahan masalah (*troubleshooting*) pada sistem informasi **BLUD SMKN 2 Purwakarta**.
 
 ---
 
-## 💻 1. Prasyarat Sistem (System Requirements)
+##  1. Prasyarat Sistem (System Requirements)
 
 Sebelum memulai proses instalasi, pastikan lingkungan komputer server atau lokal Anda telah memenuhi spesifikasi berikut:
 
@@ -19,7 +19,7 @@ Sebelum memulai proses instalasi, pastikan lingkungan komputer server atau lokal
 
 ---
 
-## 📥 2. Langkah-Langkah Instalasi (Step-by-Step)
+##  2. Langkah-Langkah Instalasi (Step-by-Step)
 
 ### Langkah 1: Clone Repository Proyek
 Buka terminal / PowerShell dan arahkan ke direktori kerja Anda:
@@ -56,7 +56,7 @@ php artisan key:generate
 
 ---
 
-## ⚙️ 3. Konfigurasi Berkas `.env`
+##  3. Konfigurasi Berkas `.env`
 
 Buka berkas `.env` menggunakan editor teks (VS Code, Antigravity, dll.) dan sesuaikan parameter berikut:
 
@@ -90,7 +90,7 @@ GOOGLE_REDIRECT_URI="${APP_URL}/auth/google/callback"
 
 ---
 
-## 🌐 4. Panduan Setup Google Cloud Console OAuth 2.0
+##  4. Panduan Setup Google Cloud Console OAuth 2.0
 
 Untuk mengaktifkan fitur **Login dengan Google SSO**, ikuti langkah pendaftaran kredensial berikut:
 
@@ -132,14 +132,14 @@ sequenceDiagram
 
 ---
 
-## 🗄️ 5. Migrasi & Seeding Data Awal
+##  5. Migrasi & Seeding Data Awal
 
 Jalankan perintah migrasi skema tabel sekaligus mengisi data bawaan profil instansi, kategori, dan akun demo:
 ```bash
 php artisan migrate:fresh --seed
 ```
 
-### 👤 Akun Bawaan untuk Pengujian:
+###  Akun Bawaan untuk Pengujian:
 | Peran (Role) | Alamat Email | Kata Sandi | Hak Akses |
 |---|---|---|---|
 | **Super Admin** | `admin@smkn2purwakarta.sch.id` | `password` | Akses penuh dashboard `/admin` |
@@ -147,7 +147,7 @@ php artisan migrate:fresh --seed
 
 ---
 
-## 🔗 6. Pembuatan Storage Link & Build Aset
+##  6. Pembuatan Storage Link & Build Aset
 
 ### 6.1. Buat Symbolic Link Direktori Berkas
 Perintah ini menghubungkan berkas unggahan di `storage/app/public` agar dapat diakses dari browser melalui `public/storage`:
@@ -167,7 +167,7 @@ php artisan storage:link
 
 ---
 
-## 🚀 7. Menjalankan Server Lokal
+##  7. Menjalankan Server Lokal
 
 Buka dua jendela terminal untuk menjalankan server aplikasi dan server kompilasi frontend:
 
@@ -186,9 +186,9 @@ Buka peramban (*browser*) dan akses `http://localhost:8000`.
 
 ---
 
-## ❓ 8. Solusi Masalah Umum (Troubleshooting)
+##  8. Solusi Masalah Umum (Troubleshooting)
 
-### 🔴 Masalah 1: Gambar layanan/fasilitas/logo tidak muncul (Error 404 pada URL `/storage/...`)
+###  Masalah 1: Gambar layanan/fasilitas/logo tidak muncul (Error 404 pada URL `/storage/...`)
 - **Penyebab**: Symbolic link penyimpanan belum dibuat atau terputus.
 - **Solusi**:
   ```bash
@@ -196,15 +196,15 @@ Buka peramban (*browser*) dan akses `http://localhost:8000`.
   ```
   *(Pada Windows, pastikan terminal dijalankan dengan hak akses yang memadai jika symlink gagal).*
 
-### 🔴 Masalah 2: Error cURL 60 SSL Certificate saat Login dengan Google
+###  Masalah 2: Error cURL 60 SSL Certificate saat Login dengan Google
 - **Penyebab**: PHP di Windows tidak memiliki berkas sertifikat CA terdaftar (`cacert.pem`).
 - **Solusi**: Di `GoogleAuthController.php`, pemanggilan HTTP sudah dilengkapi opsi `Http::withOptions(['verify' => false])` untuk lingkungan lokal, atau unduh `cacert.pem` dari curl.se dan atur `curl.cainfo = "C:\path\to\cacert.pem"` di `php.ini`.
 
-### 🔴 Masalah 3: Gagal koneksi basis data (*SQLSTATE[HY000] [2002] Connection refused*)
+###  Masalah 3: Gagal koneksi basis data (*SQLSTATE[HY000] [2002] Connection refused*)
 - **Penyebab**: Server MySQL belum berjalan atau port berbeda.
 - **Solusi**: Pastikan service MySQL di Laragon/XAMPP sudah dalam kondisi *Running*, periksa port di `.env` (biasanya `3306`), dan pastikan database `blud_smkn2` sudah dibuat.
 
-### 🔴 Masalah 4: Perubahan CSS Tailwind tidak terdeteksi
+###  Masalah 4: Perubahan CSS Tailwind tidak terdeteksi
 - **Penyebab**: Server Vite belum di-refresh atau cache view Blade masih menyimpan tampilan lama.
 - **Solusi**:
   ```bash

@@ -1,10 +1,10 @@
-# 🌟 Dokumentasi Fitur & Modul - BLUD SMKN 2 Purwakarta
+#  Dokumentasi Fitur & Modul - BLUD SMKN 2 Purwakarta
 
 Dokumen ini menjelaskan secara menyeluruh seluruh fitur dan modul fungsional yang tersedia pada sistem informasi **BLUD SMKN 2 Purwakarta**, baik pada **Portal Publik (Frontend)** maupun **Panel Administrasi (Backend Admin)**.
 
 ---
 
-## 🏛️ 1. Modul Portal Informasi Publik
+##  1. Modul Portal Informasi Publik
 
 Portal publik didesain secara modern, responsif, dan kaya estetika untuk menyajikan transparansi informasi BLUD kepada masyarakat, siswa, wali murid, dan mitra industri (IDUKA).
 
@@ -53,9 +53,9 @@ graph TD
 ### 1.4. Sarana, Prasarana & Fasilitas (`/fasilitas`)
 - **Galeri Bengkel & Laboratorium**: Menampilkan foto sarana praktik siswa dan ruangan sewa instansi.
 - **Badge Status Kondisi Interaktif**:
-  - 🟢 **Tersedia (*Available*)**: Fasilitas siap digunakan / disewa.
-  - 🟡 **Dalam Perawatan (*Maintenance*)**: Sedang dalam tahap servis atau kalibrasi alat.
-  - 🔴 **Tidak Tersedia (*Unavailable*)**: Sedang dipakai jadwal penuh.
+  -  **Tersedia (*Available*)**: Fasilitas siap digunakan / disewa.
+  -  **Dalam Perawatan (*Maintenance*)**: Sedang dalam tahap servis atau kalibrasi alat.
+  -  **Tidak Tersedia (*Unavailable*)**: Sedang dipakai jadwal penuh.
 - **Spesifikasi Sarana**: Lokasi gedung, kapasitas orang/peserta, dan jam operasional harian.
 
 ---
@@ -85,7 +85,7 @@ graph TD
 
 ---
 
-## ⚙️ 2. Modul Panel Administrasi (Admin Dashboard)
+##  2. Modul Panel Administrasi (Admin Dashboard)
 
 Panel kontrol khusus administrator yang diamankan dengan `AdminMiddleware` di route `/admin/*`.
 
@@ -156,9 +156,9 @@ graph TD
 ### 2.7. Kotak Masuk Pesan Pengunjung (`/admin/contact-messages`)
 - **Daftar Pesan Masuk**: Menampilkan daftar pertanyaan dan proposal kerjasama dari publik.
 - **Badge Status Penanganan**:
-  - 🔴 `new`: Pesan baru belum dibaca.
-  - 🟡 `read`: Pesan sudah dibuka dan dibaca admin.
-  - 🟢 `replied`: Pesan telah selesai dibalas / ditindaklanjuti.
+  -  `new`: Pesan baru belum dibaca.
+  -  `read`: Pesan sudah dibuka dan dibaca admin.
+  -  `replied`: Pesan telah selesai dibalas / ditindaklanjuti.
 - **Aksi Cepat Balas**: Tautan langsung untuk membalas pengirim via email atau nomor WhatsApp.
 
 ---

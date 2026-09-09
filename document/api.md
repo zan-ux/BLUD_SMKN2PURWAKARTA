@@ -4,7 +4,7 @@ Dokumen ini memuat spesifikasi integrasi antarmuka pemrograman aplikasi (**API**
 
 ---
 
-## 🗺️ 1. Peta Integrasi API
+##  1. Peta Integrasi API
 
 ```mermaid
 graph LR
@@ -35,7 +35,7 @@ graph LR
 
 ---
 
-## 🔑 2. Integrasi API Eksternal
+##  2. Integrasi API Eksternal
 
 ### 2.1. Google OAuth 2.0 API (Single Sign-On)
 Digunakan untuk mengautentikasi pengguna secara aman menggunakan akun Google resmi tanpa perlu membuat kata sandi manual.
@@ -110,7 +110,7 @@ Digunakan pada halaman **Kontak** (`/kontak`) dan **Profil** (`/profil`) untuk m
 
 ---
 
-## ⚡ 3. Katalog Internal REST & AJAX Endpoints
+##  3. Katalog Internal REST & AJAX Endpoints
 
 Sistem menyediakan sejumlah endpoint internal untuk menangani interaksi frontend asinkron (AJAX) dan RESTful CRUD.
 

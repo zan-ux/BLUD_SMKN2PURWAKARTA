@@ -1,10 +1,9 @@
-# 🗄️ Dokumentasi Basis Data (Database) - BLUD SMKN 2 Purwakarta
-
+#  Dokumentasi Basis Data (Database) - BLUD SMKN 2 Purwakarta
 Dokumen ini menjelaskan struktur arsitektur basis data, Entity Relationship Diagram (ERD), skema tabel lengkap, Model Eloquent, relasi antar entitas, serta pengelolaan migrasi dan data seeder pada sistem informasi **BLUD SMKN 2 Purwakarta**.
 
 ---
 
-## 🏗️ 1. Diagram Hubungan Entitas (ERD)
+##  1. Diagram Hubungan Entitas (ERD)
 
 ```mermaid
 erDiagram
@@ -162,7 +161,7 @@ erDiagram
 
 ---
 
-## 📋 2. Skema Tabel Terinci
+##  2. Skema Tabel Terinci
 
 ### 2.1. Tabel `users`
 Menyimpan data akun pengguna baik administrator maupun pengunjung/viewer, termasuk data autentikasi Google SSO.
@@ -349,7 +348,7 @@ Menyimpan jejak audit (*audit trail*) setiap aktivitas krusial yang dilakukan ad
 
 ---
 
-## 💻 3. Model Eloquent & Relasi Data
+##  3. Model Eloquent & Relasi Data
 
 Seluruh model berada di direktori `app/Models/`:
 
@@ -369,7 +368,7 @@ Seluruh model berada di direktori `app/Models/`:
 
 ---
 
-## 🚀 4. Data Seeder & Inisialisasi
+##  4. Data Seeder & Inisialisasi
 
 Untuk mengisi data awal instansi SMKN 2 Purwakarta, seeder yang tersedia di folder `database/seeders/` mencakup:
 

@@ -1,10 +1,10 @@
-# 🔐 Dokumentasi Autentikasi & Otorisasi - BLUD SMKN 2 Purwakarta
+# 🔐Dokumentasi Autentikasi & Otorisasi - BLUD SMKN 2 Purwakarta
 
 Dokumen ini menjelaskan mekanisme keamanan autentikasi pengguna (*authentication*), integrasi Google Single Sign-On (OAuth 2.0), kontrol hak akses berbasis peran (*Role-Based Access Control / RBAC*), dan proteksi middleware pada sistem informasi **BLUD SMKN 2 Purwakarta**.
 
 ---
 
-## 🛡️ 1. Arsitektur Keamanan Pengguna
+##  1. Arsitektur Keamanan Pengguna
 
 Sistem mengadopsi skema autentikasi ganda (*Hybrid Authentication*):
 1. **Autentikasi Tradisional**: Berbasis kombinasi email dan kata sandi lokal terenkripsi *Bcrypt Hash*.

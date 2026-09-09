@@ -1,10 +1,10 @@
-# 🏛️ Dokumentasi Arsitektur Sistem - BLUD SMKN 2 Purwakarta
+#  Dokumentasi Arsitektur Sistem - BLUD SMKN 2 Purwakarta
 
 Dokumen ini menguraikan arsitektur perangkat lunak, struktur direktori, pola desain *Model-View-Controller (MVC)*, *asset bundling pipeline* menggunakan Vite + Tailwind CSS v4, serta manajemen penyimpanan media berkas pada sistem **BLUD SMKN 2 Purwakarta**.
 
 ---
 
-## 🏗️ 1. Diagram Arsitektur Tingkat Tinggi
+##  1. Diagram Arsitektur Tingkat Tinggi
 
 ```mermaid
 graph TD
@@ -48,7 +48,7 @@ graph TD
 
 ---
 
-## 📂 2. Struktur Direktori Proyek
+##  2. Struktur Direktori Proyek
 
 Struktur folder utama proyek diatur secara modular sesuai standar modern Laravel 13:
 
@@ -100,7 +100,7 @@ c:\Users\zanrp\BLUDSMEKDA\
 
 ---
 
-## 🎨 3. Frontend Asset Pipeline (Vite + Tailwind CSS v4)
+##  3. Frontend Asset Pipeline (Vite + Tailwind CSS v4)
 
 Sistem menggunakan standar bundler frontend terkini: **Vite 8** yang dipadukan dengan **Tailwind CSS v4** (`@tailwindcss/vite`).
 
@@ -130,7 +130,7 @@ export default defineConfig({
 
 ---
 
-## 💾 4. Manajemen Berkas & Media Storage
+##  4. Manajemen Berkas & Media Storage
 
 Berkas unggahan (seperti logo instansi, foto kepala sekolah, brosur layanan, foto bengkel/fasilitas, dan gambar berita) disimpan secara terisolasi pada `storage/app/public/`.
 

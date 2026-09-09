@@ -1,10 +1,10 @@
-# 📚 Dokumentasi Teknis BLUD SMKN 2 Purwakarta
+#  Dokumentasi Teknis BLUD SMKN 2 Purwakarta
 
 Selamat datang di pusat dokumentasi teknis sistem informasi **BLUD SMKN 2 Purwakarta**. Dokumentasi ini disusun secara modular untuk mempermudah pengembang (*developer*), administrator sistem, dan pemangku kepentingan dalam memahami, mengelola, serta mengembangkan aplikasi ini.
 
 ---
 
-## 📑 Daftar Dokumen Teknis
+##  Daftar Dokumen Teknis
 
 Silakan pilih topik dokumentasi yang ingin dipelajari:
 
@@ -19,7 +19,7 @@ Silakan pilih topik dokumentasi yang ingin dipelajari:
 
 ---
 
-## 🧭 Ringkasan Arsitektur & Teknologi
+##  Ringkasan Arsitektur & Teknologi
 
 ```mermaid
 graph TD
@@ -33,7 +33,7 @@ graph TD
     WebServer --> Storage[File Storage / Symlink]
 ```
 
-### 🛠️ Ringkasan Tech Stack
+###  Ringkasan Tech Stack
 - **Backend Framework**: Laravel 13 (PHP 8.3+)
 - **Database**: MySQL / MariaDB
 - **Frontend**: Blade Templating, Tailwind CSS v4, Vite 8, AOS (Animate On Scroll), SweetAlert2, FontAwesome 6
@@ -42,7 +42,7 @@ graph TD
 
 ---
 
-## 📌 Navigasi Cepat
+##  Navigasi Cepat
 - Kembali ke halaman utama proyek: [README.md (Utama)](file:///c:/Users/zanrp/BLUDSMEKDA/README.md)
 - Mulai instalasi aplikasi: [setup.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/setup.md)
 - Pelajari struktur database: [database.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/database.md)
