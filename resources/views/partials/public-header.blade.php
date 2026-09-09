@@ -26,6 +26,8 @@
                 <a href="{{ route('public.facilities') }}" class="text-sm font-medium {{ request()->routeIs('public.facilities*') ? 'text-green-800 font-bold border-b-2 border-green-800' : 'text-gray-700 hover:text-green-800' }} pb-2">Fasilitas</a>
                 <a href="{{ route('public.news') }}" class="text-sm font-medium {{ request()->routeIs('public.news*') ? 'text-green-800 font-bold border-b-2 border-green-800' : 'text-gray-700 hover:text-green-800' }} pb-2">Berita</a>
                 <a href="{{ route('public.organigram') }}" class="text-sm font-medium {{ request()->routeIs('public.organigram') ? 'text-green-800 font-bold border-b-2 border-green-800' : 'text-gray-700 hover:text-green-800' }} pb-2">Organigram</a>
+                <a href="{{ route('public.guide') }}" class="text-sm font-medium {{ request()->routeIs('public.guide') ? 'text-green-800 font-bold border-b-2 border-green-800' : 'text-gray-700 hover:text-green-800' }} pb-2">Petunjuk</a>
+
             </nav>
 
 <!-- Auth Buttons -->

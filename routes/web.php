@@ -15,8 +15,11 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ActivityLogController;
 use App\Http\Controllers\AdminAccountController;
 use App\Http\Controllers\GoogleAuthController;
+use App\Http\Controllers\GuideController;
+
 
 // ==================== PUBLIC ROUTES ====================
+Route::get('/petunjuk', [GuideController::class, 'index'])->name('public.guide');
 Route::get('/', [PublicController::class, 'home'])->name('home');
 Route::get('/profil', [PublicController::class, 'profile'])->name('public.profile');
 Route::get('/layanan', [PublicController::class, 'services'])->name('public.services');
