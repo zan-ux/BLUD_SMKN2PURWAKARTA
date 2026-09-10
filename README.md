@@ -1,4 +1,4 @@
-# Portal Web BLUD SMKN 2 Purwakarta (BLUDSMEKDA)
+# BLUD SMKN 2 Purwakarta Web Portal (BLUDSMEKDA)
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="220" alt="Laravel Logo">
@@ -15,210 +15,211 @@
 
 ---
 
-##  Daftar Isi
-1. [Tentang Website](#-tentang-website)
-2. [Fitur dan Isi Website](#-fitur-dan-isi-website)
-   - [Halaman Publik (Public Portal)](#1-halaman-publik-public-portal)
-   - [Sistem Autentikasi & Keamanan](#2-sistem-autentikasi--keamanan)
-   - [Panel Administrasi (Admin Dashboard)](#3-panel-administrasi-admin-dashboard)
-3. [Teknologi yang Digunakan (Tech Stack)](#-teknologi-yang-digunakan-tech-stack)
-4. [Cara Kerja Sistem](#-cara-kerja-sistem)
-   - [Arsitektur Aplikasi](#1-arsitektur-aplikasi)
-   - [Alur Autentikasi Pengguna & SSO Google](#2-alur-autentikasi-pengguna--sso-google)
-   - [Alur Pengelolaan Konten & Publikasi](#3-alur-pengelolaan-konten--publikasi)
-   - [Alur Layanan Pesan & Kontak Pengunjung](#4-alur-layanan-pesan--kontak-pengunjung)
-5. [Struktur Folder Proyek](#-struktur-folder-proyek)
-6. [Panduan Instalasi & Menjalankan Proyek](#-panduan-instalasi--menjalankan-proyek)
-7. [Akun Pengguna Default (Seeder)](#-akun-pengguna-default-seeder)
-8. [Lisensi](#-lisensi)
+## Table of Contents
+1. [About the Website](#about-the-website)
+2. [Features and Content](#features-and-content)
+   - [Public Portal](#1-public-portal)
+   - [Authentication & Security System](#2-authentication--security-system)
+   - [Administration Panel (Admin Dashboard)](#3-administration-panel-admin-dashboard)
+3. [Tech Stack](#tech-stack)
+4. [How the System Works](#how-the-system-works)
+   - [Application Architecture](#1-application-architecture)
+   - [User Authentication & Google SSO Flow](#2-user-authentication--google-sso-flow)
+   - [Content Management & Publishing Workflow](#3-content-management--publishing-workflow)
+   - [Visitor Contact & Messaging Workflow](#4-visitor-contact--messaging-workflow)
+5. [Project Folder Structure](#project-folder-structure)
+6. [Installation & Setup Guide](#installation--setup-guide)
+7. [Default User Accounts (Seeder)](#default-user-accounts-seeder)
+8. [Modular Technical Documentation](#modular-technical-documentation)
+9. [License](#license)
 
 ---
 
-## Tentang Website
+## About the Website
 
-**BLUDSMEKDA** adalah platform portal web resmi dan sistem informasi manajemen untuk **Badan Layanan Umum Daerah (BLUD) SMK Negeri 2 Purwakarta**. 
+**BLUDSMEKDA** is the official web portal platform and management information system for **Badan Layanan Umum Daerah (BLUD) SMK Negeri 2 Purwakarta**.
 
-Website ini dirancang untuk:
-1. **Transparansi & Informasi Publik**: Memperkenalkan profil sekolah, legalitas, visi misi, sarana prasarana, dan struktur organisasi BLUD kepada masyarakat luas.
-2. **Komersialisasi Produk & Layanan Vokasi**: Mempublikasikan produk karya siswa, jasa profesional (seperti IT/website, percetakan, tata boga/layanan jasa lainnya), serta penyewaan fasilitas sekolah (lab komputer, gedung/aula, lapangan) dengan standar industri.
-3. **Pemberitaan & Pengumuman**: Menyajikan kabar terkini, kegiatan pelatihan vokasi, artikel, dan informasi resmi secara berkala.
-4. **Komunikasi Terpadu**: Menyediakan formulir pesan interaktif bagi masyarakat atau mitra industri untuk menghubungi pengelola BLUD secara langsung.
-
----
-
-## Fitur dan Isi Website
-
-Aplikasi ini terbagi menjadi dua bagian utama: **Portal Publik** untuk pengunjung umum dan **Panel Administrator** untuk pengelola BLUD.
-
-### 1. Halaman Publik (Public Portal)
-* **. Beranda (Home)**:
-  - *Hero Section* modern dengan slogan dan tombol aksi cepat (*Call to Action*).
-  - Ringkasan profil singkat dan keunggulan BLUD SMKN 2 Purwakarta.
-  - *Showcase* layanan dan produk unggulan terpopuler.
-  - Kartu berita & informasi terkini.
-  - Integrasi lokasi sekolah dengan Google Maps interaktif.
-* **. Profil Lembaga**:
-  - Informasi identitas resmi BLUD (Dasar hukum, tahun berdiri, kontak resmi, alamat).
-  - Sambutan Kepala Sekolah beserta foto pimpinan.
-  - Sejarah dan latar belakang pembentukan BLUD.
-  - Visi dan Misi sekolah/BLUD.
-* **. Katalog Layanan & Produk**:
-  - Menampilkan daftar produk/jasa yang ditawarkan BLUD (dengan sistem paginasi).
-  - Filter dan pengelompokan berdasarkan kategori layanan.
-  - **Halaman Detail Layanan**: Informasi rincian harga/tarif, estimasi durasi pengerjaan, persyaratan pemesanan, indikator layanan online/offline, dan rekomendasi layanan terkait.
-* **. Fasilitas Sekolah**:
-  - Menampilkan daftar sarana & prasarana yang dapat digunakan/disewa (misal: Lab Komputer, Aula, Lapangan Olahraga, Ruang Praktik).
-  - Informasi kapasitas ruangan, jam operasional, dan lokasi gedung.
-  - Status ketersediaan fasilitas (*Tersedia*, *Pemeliharaan*, atau *Tidak Tersedia*).
-* **. Portal Berita & Artikel**:
-  - Daftar artikel berita dan pengumuman dengan *thumbnail*, kategori, tanggal terbit, dan cuplikan ringkasan.
-  - *Featured News* (Berita Utama).
-  - **Halaman Baca Berita**: Tampilan artikel penuh berbasis rich-content dengan URL ramah SEO (*SEO Friendly Slug*) dan rekomendasi artikel terkait.
-* **. Struktur Organisasi (Organigram)**:
-  - Menampilkan bagan struktur pimpinan dan unit kerja BLUD secara hierarkis (Kepala Sekolah, Direktur, Wakil Direktur, Koordinator Bidang, dll.).
-  - Kartu profil pejabat dilengkapi foto, nama lengkap, jabatan, divisi, dan NIP.
-* **. Kontak Kami (Hubungi BLUD)**:
-  - Informasi alamat kantor, jam operasional, nomor telepon, dan email resmi.
-  - Formulir kirim pesan publik langsung ke database admin dengan validasi data nomor telepon dan email.
+This website is designed for:
+1. **Transparency & Public Information**: Introducing the school profile, legal basis, vision and mission, facilities, and the BLUD organizational structure to the public.
+2. **Commercialization of Vocational Products & Services**: Promoting student-made products, professional vocational services (such as IT/web development, printing, culinary services, and other vocational business units), as well as facility rentals (computer labs, halls/auditoriums, sports fields) to industry standards.
+3. **News & Announcements**: Delivering up-to-date news, vocational training activities, articles, and official announcements periodically.
+4. **Integrated Communication**: Providing interactive contact forms for the general public or industrial partners to reach out to the BLUD management directly.
 
 ---
 
-### 2. Sistem Autentikasi & Keamanan
-* **Email & Password Login**: Login standar menggunakan enkripsi kata sandi `bcrypt`.
+## Features and Content
+
+The application is divided into two primary sections: the **Public Portal** for general visitors and the **Administrator Panel** for BLUD management staff.
+
+### 1. Public Portal
+* **Home Page**:
+  - Modern *Hero Section* with taglines, value propositions, and quick Call-to-Action (CTA) buttons.
+  - Brief institutional overview and core strengths of BLUD SMKN 2 Purwakarta.
+  - *Showcase* of featured and popular vocational products & services.
+  - Latest news & announcement cards.
+  - Interactive school location via embedded Google Maps.
+* **Institutional Profile**:
+  - Official BLUD identity (Legal decree basis, founding year, official contact details, address).
+  - Principal's welcoming speech and leadership portraits.
+  - History and background of the BLUD formation.
+  - School and BLUD Vision & Mission statements.
+* **Services & Products Catalog**:
+  - List of products and services offered by the BLUD (with pagination).
+  - Filtering and grouping by service categories.
+  - **Service Detail Page**: Pricing/rates information, estimated turnaround time, ordering requirements, online/offline service indicators, and related service recommendations.
+* **School Facilities**:
+  - List of facilities and infrastructure available for use/rental (e.g., Computer Labs, Auditorium/Hall, Sports Field, Practical Workshop Rooms).
+  - Room capacity, operating hours, and building location details.
+  - Real-time availability status (*Available*, *Maintenance*, or *Unavailable*).
+* **News & Articles Portal**:
+  - News and announcement list with thumbnails, categories, publication dates, and summary snippets.
+  - *Featured News* highlight.
+  - **News Article Page**: Rich-content article view with SEO-friendly slugs and related news recommendations.
+* **Organizational Structure (Organigram)**:
+  - Hierarchical tree chart of the BLUD management team (Principal, Director, Vice Director, Department Coordinators, etc.).
+  - Personnel cards with formal photo, full name with academic titles, position, department, and Employee ID (NIP).
+* **Contact Us**:
+  - Office address, operating hours, telephone numbers, and official email.
+  - Public contact submission form with input validation (phone number and email format).
+
+---
+
+### 2. Authentication & Security System
+* **Email & Password Login**: Standard authentication using `bcrypt` password encryption.
 * **Google OAuth 2.0 Single Sign-On (SSO)**:
-  - Pengguna dapat masuk atau mendaftar hanya dengan satu klik menggunakan akun Google.
-  - Fitur pelengkap profil otomatis jika akun Google baru pertama kali mendaftar (pengisian nomor telepon).
+  - Users can sign in or register with one click using their Google accounts.
+  - Automated profile completion prompt for new Google SSO users (phone number input).
 * **Role-Based Access Control (RBAC)**:
-  - `admin`: Memiliki akses penuh ke seluruh menu manajemen data pada dashboard admin.
-  - `viewer`: Pengguna biasa/pengunjung terdaftar untuk interaksi publik.
+  - `admin`: Full access to all management modules on the admin dashboard.
+  - `viewer`: Regular registered users/visitors for public portal interactions.
 * **Security & Middleware Protection**:
-  - Middleware `admin` menjaga agar rute `/admin/*` tidak dapat diakses tanpa hak akses admin.
-  - Proteksi anti-CSRF token pada seluruh form transaksi data.
-  - Proteksi *Self-Delete Prevention* agar admin yang sedang login tidak dapat menghapus akunnya sendiri.
-  - Fitur *Toggle Active/Inactive* untuk mengunci akun pengguna yang melanggar.
+  - `AdminMiddleware` protects all `/admin/*` routes from unauthorized access.
+  - CSRF token protection on all state-mutating requests.
+  - *Self-Delete Prevention* prevents the currently authenticated admin from deleting their own account.
+  - *Toggle Active/Inactive* feature allows administrators to suspend problematic accounts instantly.
 
 ---
 
-### 3. Panel Administrasi (Admin Dashboard)
-Akses di URL `/admin/dashboard` yang dilengkapi sidebar navigasi dan desain UI responsif:
+### 3. Administration Panel (Admin Dashboard)
+Accessible at `/admin/dashboard`, featuring a responsive UI layout with a navigation sidebar:
 
-| Modul Admin | Deskripsi & Fungsi Fitur |
+| Admin Module | Description & Feature Highlights |
 | :--- | :--- |
-| **. Dashboard Ringkasan** | Ringkasan metrik statistik (Total Layanan, Layanan Aktif, Total Fasilitas, Fasilitas Tersedia, Total Berita, Berita Terbit, Pesan Belum Dibaca, Total Struktur Organisasi), grafik tren publikasi bulanan, daftar berita terbaru, dan pesan masuk terbaru. |
-| **. Manajemen Berita** | Tambah, edit, hapus, dan cari berita. Pengaturan status publikasi (*Draft*, *Published*, *Archived*), auto-generate slug, upload gambar thumbnail, dan manajemen tags. |
-| **. Manajemen Layanan** | Tambah, ubah, dan hapus layanan/produk. Pengaturan harga, durasi pengerjaan, syarat layanan, status online, serta tombol cepat *toggle active/inactive* via AJAX. |
-| **. Manajemen Fasilitas** | Manajemen sarana prasarana sekolah, upload foto fasilitas, pengaturan lokasi, kapasitas, jam operasional, dan pembaruan status ketersediaan (*available*, *maintenance*, *unavailable*) via AJAX. |
-| **. Manajemen Organigram** | Pengaturan bagan hierarki kepengurusan BLUD (Parent-Child Tree), upload foto pengurus, jabatan, NIP, serta urutan nomor tampilan. |
-| **. Manajemen Profil BLUD** | Pengaturan informasi legalitas lembaga, nama instansi, visi & misi, sambutan kepala sekolah, foto sejarah, serta logo resmi BLUD. |
-| **. Manajemen Pesan Kontak** | Melihat pesan masuk dari pengunjung, filter berdasarkan status pesan, aksi tandai telah dibaca (*Mark as Read*), dan tandai telah ditindaklanjuti/dibalas (*Mark as Replied*). |
-| **. Manajemen Pengguna** | Tambah pengguna baru, ubah role (*Admin* / *Viewer*), atur password, aktifkan/nonaktifkan status akun, dan pencarian user. |
-| **. Log Aktivitas Sistem** | Memantau seluruh rekaman aktivitas pengguna/admin, filter berdasarkan aksi dan rentang tanggal, serta fitur pembersihan log lama (> 30 hari). |
+| **Summary Dashboard** | Statistical metrics overview (Total Services, Active Services, Total Facilities, Available Facilities, Total News, Published News, Unread Messages, Total Organigram Members), monthly publishing trend charts, latest published articles, and recent incoming messages. |
+| **News Management** | Create, edit, delete, and search news articles. Publication status workflow (*Draft*, *Published*, *Archived*), automatic slug generation, thumbnail uploads, and tag management. |
+| **Services Management** | Full CRUD for products and vocational services. Pricing, turnaround duration, ordering terms, online service availability, and quick AJAX active/inactive status toggles. |
+| **Facilities Management** | School infrastructure management, photo uploads, location, capacity, operating hours, and quick AJAX status toggles (*available*, *maintenance*, *unavailable*). |
+| **Organigram Management** | Hierarchical BLUD organizational tree structure (Parent-Child Tree), photo uploads, position, department, NIP, and display order indexing. |
+| **BLUD Profile Management** | Legal status, institutional details, vision & mission, principal's greeting, historical documentation photo, and official BLUD logo. |
+| **Contact Messages Inbox** | View incoming visitor inquiries, filter by handling status, mark as read (*Mark as Read*), and mark as responded (*Mark as Replied*). |
+| **User Management** | Create new users, update user roles (*Admin* / *Viewer*), reset passwords, toggle account active status, and search users. |
+| **System Activity Logs** | Real-time audit trail of user and admin activities, filtering by action type and date range, with a one-click purge tool for logs older than 30 days. |
 
 ---
 
-##  Teknologi yang Digunakan (Tech Stack)
+## Tech Stack
 
 ### **Backend**
-- **Bahasa Pemrograman**: [PHP 8.3+](https://www.php.net/)
+- **Programming Language**: [PHP 8.3+](https://www.php.net/)
 - **Framework**: [Laravel 13.x](https://laravel.com/)
-- **ORM**: Eloquent ORM (Relasi Database, Mutator, Query Scope)
-- **Autentikasi**: Laravel Session Auth, Laravel Sanctum, Google OAuth API via Socialite Provider
-- **Pustaka Pendukung**:
-  - `cviebrock/eloquent-sluggable`: Pembuatan slug URL otomatis dan unik untuk artikel.
-  - `socialiteproviders/google`: Integrasi Single Sign-On (SSO) Google.
+- **ORM**: Eloquent ORM (Relationships, Mutators, Query Scopes)
+- **Authentication**: Laravel Session Auth, Laravel Sanctum, Google OAuth API via Socialite Provider
+- **Supporting Packages**:
+  - `cviebrock/eloquent-sluggable`: Automatic, unique URL slug generation for articles.
+  - `socialiteproviders/google`: Google Single Sign-On (SSO) integration.
 
 ### **Frontend**
 - **Template Engine**: Laravel Blade Components & Layouts
 - **CSS Framework**: [Tailwind CSS v4.0](https://tailwindcss.com/)
 - **Bundler & Build Tool**: [Vite 8.0](https://vitejs.dev/) & `@tailwindcss/vite`
-- **Animasi & Interaktivitas**:
-  - [AOS (Animate On Scroll)](https://michalsnik.github.io/aos/) untuk efek animasi masuk yang halus.
-  - JavaScript Vanilla / Fetch API untuk operasi interaktif AJAX (toggle status, update role, dll).
+- **Animations & Interactivity**:
+  - [AOS (Animate On Scroll)](https://michalsnik.github.io/aos/) for smooth scroll-reveal animations.
+  - Vanilla JavaScript / Fetch API for interactive AJAX operations (status toggles, role updates, etc.).
 
 ### **Database & Storage**
-- **RDBMS**: [MySQL](https://www.mysql.com/) / MariaDB (Kompatibel dengan PostgreSQL dan SQLite).
-- **File Storage**: Laravel Storage (`public` disk symbolic link) untuk file gambar logo, berita, fasilitas, layanan, dan foto pengurus.
+- **RDBMS**: [MySQL](https://www.mysql.com/) / MariaDB (Compatible with PostgreSQL and SQLite).
+- **File Storage**: Laravel Storage (`public` disk symbolic link) for logos, news thumbnails, facility photos, service brochures, and personnel portraits.
 
 ---
 
-##  Cara Kerja Sistem
+## How the System Works
 
-### 1. Arsitektur Aplikasi
-Aplikasi ini dibangun menggunakan pola arsitektur **MVC (Model-View-Controller)**:
+### 1. Application Architecture
+The application is structured using the classic **MVC (Model-View-Controller)** architectural pattern:
 
 ```mermaid
 graph TD
-    User([Pengguna / Klien]) -->|HTTP Request| Route[Laravel Router / routes/web.php]
+    User([User / Client]) -->|HTTP Request| Route[Laravel Router / routes/web.php]
     Route -->|Middleware Check: Auth & Admin| Middleware[Admin / Auth Middleware]
-    Middleware -->|Terverifikasi| Controller[Controller Layer]
-    Controller -->|Query Data / Bisnis Logika| Model[Eloquent Model]
+    Middleware -->|Verified| Controller[Controller Layer]
+    Controller -->|Query Data / Business Logic| Model[Eloquent Model]
     Model <-->|SQL Data Exchange| DB[(MySQL Database)]
-    Controller -->|Render View & Passing Data| View[Blade Template + Tailwind CSS]
-    View -->|Response HTML & Asset| User
+    Controller -->|Render View & Pass Data| View[Blade Template + Tailwind CSS]
+    View -->|HTML Response & Assets| User
 ```
 
 ---
 
-### 2. Alur Autentikasi Pengguna & SSO Google
+### 2. User Authentication & Google SSO Flow
 
 ```mermaid
 sequenceDiagram
     autonumber
-    actor User as Pengguna
-    participant Web as Web BLUDSMEKDA
+    actor User as User / Client
+    participant Web as BLUDSMEKDA App
     participant Google as Google OAuth Server
-    participant DB as Basis Data (MySQL)
+    participant DB as Database (MySQL)
 
-    alt Login Konvensional
-        User->>Web: Input Email & Password
-        Web->>DB: Validasi kredensial (Hash::check)
-        DB-->>Web: Data User Valid
-        Web-->>User: Set Session Login & Redirect (Admin Dashboard / Home)
+    alt Standard Login
+        User->>Web: Enter Email & Password
+        Web->>DB: Validate credentials (Hash::check)
+        DB-->>Web: Valid user data
+        Web-->>User: Create session & Redirect (Admin Dashboard / Home)
     else Login via Google SSO
-        User->>Web: Klik "Masuk dengan Google"
-        Web->>Google: Redirect ke Google OAuth Consent Screen
-        User->>Google: Izinkan akses profil & email
-        Google-->>Web: Kirimkan Authorization Code via Callback
-        Web->>Google: Exchange Code untuk Access Token & Fetch User Info
-        alt User Sudah Terdaftar
-            Web->>DB: Cari User berdasarkan email Google
-            Web-->>User: Set Session Login
-        else User Baru
-            Web->>User: Redirect ke Form Lengkapi Profil (No. Telp)
-            User->>Web: Submit No. Telepon
-            Web->>DB: Simpan User baru (Role: viewer)
-            Web-->>User: Set Session Login & Redirect ke Beranda
+        User->>Web: Click "Sign in with Google"
+        Web->>Google: Redirect to Google OAuth Consent Screen
+        User->>Google: Grant access to profile & email
+        Google-->>Web: Send Authorization Code via Callback
+        Web->>Google: Exchange Code for Access Token & Fetch User Info
+        alt User Already Registered
+            Web->>DB: Find User by Google email
+            Web-->>User: Create session & Log in
+        else New User
+            Web->>User: Redirect to Complete Profile Form (Phone Number)
+            User->>Web: Submit Phone Number
+            Web->>DB: Save new user (Role: viewer)
+            Web-->>User: Create session & Redirect to Home
         end
     end
 ```
 
 ---
 
-### 3. Alur Pengelolaan Konten & Publikasi
-1. **Penyimpanan Berkas Media**: Setiap file gambar (logo sekolah, thumbnail berita, foto fasilitas, personil) diunggah melalui controller dan disimpan ke dalam direktori `storage/app/public/`, lalu diakses publik melalui symbolic link `public/storage/`.
-2. **SEO Friendly Slugging**: Saat admin membuat judul berita, sistem secara otomatis menghasilkan string `slug` unik yang bersih untuk mempermudah pencarian di mesin pencari.
-3. **Penyaringan Konten Publik**: Halaman publik hanya menampilkan data dengan status aktif (contoh: `status = 'published'` untuk berita, `status = 'active'` untuk layanan, dan `status = 'available'` untuk fasilitas).
+### 3. Content Management & Publishing Workflow
+1. **Media File Storage**: Every uploaded media file (school logo, news thumbnail, facility photo, staff portrait) is processed by the respective controller and saved to `storage/app/public/`, accessible publicly via the `public/storage/` symbolic link.
+2. **SEO-Friendly Slugging**: When creating a news article, the system automatically creates a clean, unique URL `slug` for optimal search engine indexing.
+3. **Public Content Filtering**: Public pages only display active and published items (e.g., `status = 'published'` for news, `status = 'active'` for services, and `status = 'available'` for facilities).
 
 ---
 
-### 4. Alur Layanan Pesan & Kontak Pengunjung
-1. Pengunjung mengisi formulir pesan di halaman `/kontak` (Nama, Email, No. Telp, Subjek, Pesan).
-2. Sistem memvalidasi keabsahan format nomor telepon dan email.
-3. Data tersimpan di tabel `contact_messages` dengan status awal `new` (Belum dibaca).
-4. Admin menerima notifikasi badge jumlah pesan belum dibaca di Dashboard Admin.
-5. Saat admin membuka pesan, status otomatis berubah menjadi `read`. Setelah dihubungi lebih lanjut, admin dapat menandai status pesan menjadi `replied`.
+### 4. Visitor Contact & Messaging Workflow
+1. A visitor fills out the message form on `/kontak` (Name, Email, Phone, Subject, Message).
+2. The system validates the input format (email syntax and phone number formatting).
+3. The submission is saved to `contact_messages` with an initial status of `new` (Unread).
+4. Administrators receive a real-time badge count of unread messages on the Admin Dashboard.
+5. When an admin opens a message, its status automatically transitions to `read`. After responding, the admin can mark it as `replied`.
 
 ---
 
-##  Struktur Folder Proyek
+## Project Folder Structure
 
-Berikut adalah gambaran struktur direktori utama pada proyek ini:
+Overview of the core project structure:
 
 ```text
 BLUDSMEKDA/
 ├── app/
 │   ├── Http/
-│   │   ├── Controllers/             # Controller logika bisnis aplikasi
+│   │   ├── Controllers/             # Application business logic controllers
 │   │   │   ├── ActivityLogController.php
 │   │   │   ├── AuthController.php
 │   │   │   ├── ContactMessageController.php
@@ -231,17 +232,17 @@ BLUDSMEKDA/
 │   │   │   ├── PublicController.php
 │   │   │   ├── ServiceController.php
 │   │   │   └── UserController.php
-│   │   └── Middleware/              # Middleware (AdminMiddleware, dsb.)
-│   └── Models/                      # Model Eloquent (User, News, Service, Facility, dll.)
+│   │   └── Middleware/              # Middlewares (AdminMiddleware, etc.)
+│   └── Models/                      # Eloquent Models (User, News, Service, Facility, etc.)
 ├── database/
-│   ├── migrations/                  # Skema database tabel
-│   └── seeders/                     # Seeder data awal (InitialDataSeeder, AdminUserSeeder)
-├── public/                          # Public asset (css, js, images, storage symlink)
+│   ├── migrations/                  # Database schema migrations
+│   └── seeders/                     # Initial database seeders (InitialDataSeeder, AdminUserSeeder)
+├── public/                          # Public web root (css, js, images, storage symlink)
 ├── resources/
-│   ├── css/                         # File sumber styling CSS
-│   ├── js/                          # File sumber JavaScript
-│   └── views/                       # Tampilan antarmuka Blade
-│       ├── admin/                   # Template & tampilan panel admin
+│   ├── css/                         # CSS styling source files
+│   ├── js/                          # JavaScript source files
+│   └── views/                       # Blade template views
+│       ├── admin/                   # Admin panel views & templates
 │       │   ├── contact-messages/
 │       │   ├── facilities/
 │       │   ├── news/
@@ -250,57 +251,57 @@ BLUDSMEKDA/
 │       │   ├── services/
 │       │   ├── users/
 │       │   └── dashboard.blade.php
-│       ├── auth/                    # Tampilan login, register, lupa password, Google profile
-│       ├── layouts/                 # Master layout (admin.blade.php & public.blade.php)
-│       ├── partials/                # Partial views (navbar, footer, sidebar admin)
-│       └── public/                  # Halaman publik (home, profile, services, news, contact, dll.)
+│       ├── auth/                    # Auth views (login, register, forgot-password, Google profile)
+│       ├── layouts/                 # Master layouts (admin.blade.php & public.blade.php)
+│       ├── partials/                # Partial components (navbar, footer, admin sidebar)
+│       └── public/                  # Public pages (home, profile, services, news, contact, etc.)
 ├── routes/
-│   └── web.php                      # Definisi rute web publik & admin
-├── storage/                         # Log, session, dan penyimpanan file upload
-├── composer.json                    # Dependensi paket PHP
-├── package.json                     # Dependensi paket Node.js / Tailwind
-├── vite.config.js                   # Konfigurasi bundling Vite
-└── .env.example                     # Contoh konfigurasi environment
+│   └── web.php                      # Public and admin web route definitions
+├── storage/                         # Logs, sessions, and uploaded files storage
+├── composer.json                    # PHP package dependencies
+├── package.json                     # Node.js / Tailwind package dependencies
+├── vite.config.js                   # Vite bundling configuration
+└── .env.example                     # Environment configuration template
 ```
 
 ---
 
-##  Panduan Instalasi & Menjalankan Proyek
+## Installation & Setup Guide
 
-Ikuti langkah-langkah di bawah ini untuk menjalankan proyek di lingkungan pengembangan lokal:
+Follow these steps to set up and run the project in your local development environment:
 
-### 1. Prasyarat Sistem
-Pastikan perangkat Anda telah terpasang:
+### 1. System Requirements
+Make sure your system has the following installed:
 - **PHP** >= 8.3
 - **Composer** >= 2.x
 - **Node.js** >= 18.x & **NPM**
-- **MySQL Database Server** (via XAMPP, Laragon, Docker, atau standalone)
+- **MySQL Database Server** (via Laragon, XAMPP, Docker, or standalone)
 - **Git**
 
 ---
 
-### 2. Langkah-Langkah Instalasi
+### 2. Step-by-Step Installation
 
-#### **Langkah 1: Clone Repositori**
+#### **Step 1: Clone the Repository**
 ```bash
 git clone https://github.com/zan-ux/BLUD_SMKN2PURWAKARTA.git
 cd BLUDSMEKDA
 ```
 
-#### **Langkah 2: Install Dependensi PHP (Composer)**
+#### **Step 2: Install PHP Dependencies (Composer)**
 ```bash
 composer install
 ```
 
-#### **Langkah 3: Salin File Environment & Generate App Key**
+#### **Step 3: Copy Environment File & Generate Application Key**
 ```bash
 copy .env.example .env
 php artisan key:generate
 ```
-*(Gunakan `cp .env.example .env` jika menggunakan Linux/macOS)*
+*(Use `cp .env.example .env` on Linux/macOS)*
 
-#### **Langkah 4: Konfigurasi Database di `.env`**
-Buka file `.env` lalu sesuaikan konfigurasi koneksi database Anda:
+#### **Step 4: Configure Database in `.env`**
+Open the `.env` file and adjust the database connection settings:
 ```env
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
@@ -309,29 +310,29 @@ DB_DATABASE=bludsmekda
 DB_USERNAME=root
 DB_PASSWORD=
 ```
-> **Catatan**: Pastikan database `bludsmekda` sudah dibuat terlebih dahulu di MySQL/phpMyAdmin Anda.
+> **Note**: Ensure that the `bludsmekda` database has been created in MySQL / phpMyAdmin.
 
-#### **Langkah 5 (Opsional): Konfigurasi Google OAuth (SSO)**
-Jika ingin mengaktifkan fitur *Login with Google*, tambahkan kredensial dari [Google Cloud Console](https://console.cloud.google.com/):
+#### **Step 5 (Optional): Configure Google OAuth (SSO)**
+To enable the *Sign in with Google* feature, add your credentials from the [Google Cloud Console](https://console.cloud.google.com/):
 ```env
 GOOGLE_CLIENT_ID=your-google-client-id
 GOOGLE_CLIENT_SECRET=your-google-client-secret
 GOOGLE_REDIRECT_URI=http://127.0.0.1:8000/auth/google/callback
 ```
 
-#### **Langkah 6: Jalankan Migrasi & Data Seeder**
-Jalankan migrasi database beserta data awal (data dummy profil, layanan, fasilitas, berita, struktur organisasi, dan akun admin):
+#### **Step 6: Run Database Migrations & Seeders**
+Execute database migrations and populate default data (demo profiles, services, facilities, news, organizational structure, and admin accounts):
 ```bash
 php artisan migrate --seed --seeder=InitialDataSeeder
 ```
 
-#### **Langkah 7: Buat Symbolic Link Storage**
-Agar berkas gambar yang diunggah dapat diakses oleh browser:
+#### **Step 7: Create the Storage Symbolic Link**
+To make uploaded media files accessible via the browser:
 ```bash
 php artisan storage:link
 ```
 
-#### **Langkah 8: Install & Build Asset Frontend**
+#### **Step 8: Install & Build Frontend Assets**
 ```bash
 npm install
 npm run build
@@ -339,48 +340,48 @@ npm run build
 
 ---
 
-### 3. Menjalankan Server Lokal
+### 3. Running the Local Server
 
-Jalankan perintah berikut untuk menyalakan web server Laravel dan Vite secara bersamaan:
+Run the following commands in separate terminal windows to start both the Laravel server and Vite asset compiler:
 
 ```bash
-# Terminal 1: Menjalankan Laravel Development Server
+# Terminal 1: Run Laravel Development Server
 php artisan serve
 
-# Terminal 2: Menjalankan Vite Development Server (Hot Reload CSS & JS)
+# Terminal 2: Run Vite Development Server (Hot Reload for CSS & JS)
 npm run dev
 ```
 
-Buka peramban (browser) dan akses alamat:
+Open your browser and navigate to:
 ```text
 http://127.0.0.1:8000
 ```
 
 ---
 
-##  Akun Pengguna Default (Seeder)
+## Default User Accounts (Seeder)
 
-Setelah menjalankan `InitialDataSeeder`, Anda dapat login ke panel admin dengan akun default berikut:
+After running `InitialDataSeeder`, you can log in to the admin dashboard using the default account:
 
-| Role | Email | Password | Akses URL |
+| Role | Email | Password | Login URL |
 | :--- | :--- | :--- | :--- |
 | **Administrator** | `admin@blud.com` | `password123` | [http://127.0.0.1:8000/login](http://127.0.0.1:8000/login) |
 
 ---
 
-##  Dokumentasi Teknis Modular
+## Modular Technical Documentation
 
-Untuk panduan teknis yang lebih mendalam dan terpisah per topik, silakan merujuk ke folder [`document/`](file:///c:/Users/zanrp/BLUDSMEKDA/document/README.md):
+For in-depth technical guides categorized by domain, please refer to the [`document/`](file:///c:/Users/zanrp/BLUDSMEKDA/document/README.md) directory:
 
--  **[database.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/database.md)**: Skema tabel, ERD, model Eloquent, migrasi & seeder.
--  **[api.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/api.md)**: Integrasi Google OAuth 2.0, Google Maps, & internal AJAX endpoints.
--  **[auth.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/auth.md)**: Sistem login tradisional, Google SSO, RBAC & Middleware.
--  **[features.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/features.md)**: Spesifikasi rinci seluruh fitur portal publik & panel admin.
--  **[architecture.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/architecture.md)**: Pola MVC, struktur direktori, asset pipeline Vite + Tailwind v4.
--  **[setup.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/setup.md)**: Panduan instalasi step-by-step, Google Cloud Console setup & troubleshooting.
+- **[database.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/database.md)**: Database schemas, ERD, Eloquent models, migrations & seeders.
+- **[api.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/api.md)**: Google OAuth 2.0 integration, Google Maps, & internal admin AJAX endpoints.
+- **[auth.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/auth.md)**: Traditional authentication, Google SSO, RBAC & Middleware protection.
+- **[features.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/features.md)**: Detailed feature specifications for the public portal & admin dashboard.
+- **[architecture.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/architecture.md)**: MVC pattern, directory structure, Vite + Tailwind v4 asset pipeline.
+- **[setup.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/setup.md)**: Step-by-step setup guide, Google Cloud Console setup & troubleshooting.
 
 ---
 
-##  Lisensi
+## License
 
-Proyek ini dikembangkan untuk kebutuhan operasional **Badan Layanan Umum Daerah (BLUD) SMKN 2 Purwakarta** 
+This project was developed for the operational needs of **Badan Layanan Umum Daerah (BLUD) SMKN 2 Purwakarta**.

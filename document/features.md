@@ -1,177 +1,177 @@
-#  Dokumentasi Fitur & Modul - BLUD SMKN 2 Purwakarta
+# Features & Modules Documentation - BLUD SMKN 2 Purwakarta
 
-Dokumen ini menjelaskan secara menyeluruh seluruh fitur dan modul fungsional yang tersedia pada sistem informasi **BLUD SMKN 2 Purwakarta**, baik pada **Portal Publik (Frontend)** maupun **Panel Administrasi (Backend Admin)**.
+This document provides a comprehensive overview of all functional features and modules available in the **BLUD SMKN 2 Purwakarta** system, spanning both the **Public Portal (Frontend)** and the **Administration Panel (Backend Admin)**.
 
 ---
 
-##  1. Modul Portal Informasi Publik
+## 1. Public Information Portal Modules
 
-Portal publik didesain secara modern, responsif, dan kaya estetika untuk menyajikan transparansi informasi BLUD kepada masyarakat, siswa, wali murid, dan mitra industri (IDUKA).
+The public portal is designed with a modern, responsive, and visually rich aesthetic to present transparent information about the BLUD to the general public, students, parents, and industrial partners (IDUKA).
 
 ```mermaid
 graph TD
-    PublicPortal[Portal Informasi Publik BLUD]
+    PublicPortal[BLUD Public Information Portal]
     
-    PublicPortal --> Home[1. Beranda / Home]
-    PublicPortal --> Profile[2. Profil BLUD & Sekolah]
-    PublicPortal --> Services[3. Katalog Layanan Kejuruan]
-    PublicPortal --> Facilities[4. Sarana & Fasilitas]
-    PublicPortal --> News[5. Warta Berita & Artikel]
-    PublicPortal --> Organigram[6. Struktur Organisasi]
-    PublicPortal --> Contact[7. Kontak & Denah Lokasi]
+    PublicPortal --> Home[1. Home Page]
+    PublicPortal --> Profile[2. BLUD & School Profile]
+    PublicPortal --> Services[3. Vocational Services Catalog]
+    PublicPortal --> Facilities[4. Infrastructure & Facilities]
+    PublicPortal --> News[5. News & Articles Portal]
+    PublicPortal --> Organigram[6. Organizational Structure]
+    PublicPortal --> Contact[7. Contact Us & Location Map]
 ```
 
-### 1.1. Halaman Beranda (`/`)
-- **Hero Banner Interaktif**: Menampilkan identitas utama BLUD SMKN 2 Purwakarta dengan tipografi modern, badge keunggulan, dan tombol *Call-to-Action (CTA)* cepat menuju katalog layanan dan kontak.
-- **Statistik Capaian (Counter Badges)**: Menampilkan angka jumlah unit layanan, sarana laboratorium, warta kegiatan, dan mitra industri secara dinamis.
-- **Showcase Produk & Jasa Unggulan**: Cuplikan produk *Teaching Factory (TeFa)* terbaik dari berbagai program keahlian.
-- **Fasilitas Pilihan**: Pratinjau bengkel dan laboratorium modern dengan indikator ketersediaan.
-- **Warta Berita Terkini**: Artikel dan liputan kegiatan terbaru sekolah.
-- **Animasi Modern**: Didukung oleh library *AOS (Animate On Scroll)* untuk efek *fade-up* halus pada setiap bagian.
+### 1.1. Home Page (`/`)
+- **Interactive Hero Banner**: Features the core identity of BLUD SMKN 2 Purwakarta with modern typography, excellence badges, and quick *Call-to-Action (CTA)* buttons linking directly to the services catalog and contact page.
+- **Achievement Counters (Dynamic Badges)**: Displays statistics for vocational units, specialized laboratories, published news, and industrial partnerships.
+- **Featured Products & Services Showcase**: Highlights premier *Teaching Factory (TeFa)* products from various vocational departments.
+- **Selected Facilities Preview**: Showcases modern workshops and computer labs with live availability status indicators.
+- **Latest News & Updates**: Displays recent articles, announcements, and school activity coverage.
+- **Scroll Animations**: Powered by the *AOS (Animate On Scroll)* library for smooth, subtle reveal animations as the visitor scrolls.
 
 ---
 
-### 1.2. Halaman Profil BLUD & Sekolah (`/profil`)
-- **Sambutan Kepala Sekolah**: Menampilkan foto resmi dan pesan pengantar kepemimpinan.
-- **Sejarah & Latar Belakang**: Uraian transformasi SMKN 2 Purwakarta menjadi Badan Layanan Umum Daerah (BLUD).
-- **Dasar Hukum Penetapan**: Menampilkan nomor dan dasar Surat Keputusan (SK) legalitas BLUD.
-- **Visi & Misi Kelembagaan**: Penyajian poin-poin visi masa depan dan misi strategis pelayanan pendidikan vokasi.
-- **Identitas Lengkap**: Alamat kantor, kontak resmi, email dinas, dan tautan portal terkait.
+### 1.2. BLUD & School Profile Page (`/profil`)
+- **Principal's Welcome Address**: Official leadership portrait and welcoming speech from the School Principal.
+- **History & Background**: Narrative of SMKN 2 Purwakarta's evolution into a Regional Public Service Agency (BLUD).
+- **Legal Framework & Decrees**: Official decree numbers and legal accreditation establishing the BLUD.
+- **Institutional Vision & Mission**: Strategic vision, goals, and mission statements for vocational education delivery.
+- **Official Identity Details**: Campus address, official contact details, administrative email, and related institutional links.
 
 ---
 
-### 1.3. Katalog Layanan Kejuruan / Unit Usaha (`/layanan` & `/layanan/{service}`)
-- **Penyaringan Kategori**: Filter cepat berdasarkan divisi kejuruan atau bidang jasa.
-- **Kartu Produk/Jasa Interaktif**: Dilengkapi foto produk, estimasi tarif (Rp), durasi pengerjaan, dan badge status aktif.
-- **Halaman Detail Layanan (`/layanan/{id}`)**:
-  - Deskripsi rinci spesifikasi pekerjaan atau spesifikasi barang.
-  - Persyaratan berkas/dokumen pemesanan.
-  - Opsi konsultasi langsung via WhatsApp / formulir online.
+### 1.3. Vocational Services & Products Catalog (`/layanan` & `/layanan/{service}`)
+- **Category Filtering**: Fast filtering by vocational discipline or service division.
+- **Interactive Service Cards**: Product/service photography, estimated pricing (IDR), completion turnaround time, and active status indicators.
+- **Service Detail Page (`/layanan/{id}`)**:
+  - Detailed product/service technical specifications.
+  - Required documents and ordering terms.
+  - Direct inquiry action buttons via WhatsApp or online contact forms.
 
 ---
 
-### 1.4. Sarana, Prasarana & Fasilitas (`/fasilitas`)
-- **Galeri Bengkel & Laboratorium**: Menampilkan foto sarana praktik siswa dan ruangan sewa instansi.
-- **Badge Status Kondisi Interaktif**:
-  -  **Tersedia (*Available*)**: Fasilitas siap digunakan / disewa.
-  -  **Dalam Perawatan (*Maintenance*)**: Sedang dalam tahap servis atau kalibrasi alat.
-  -  **Tidak Tersedia (*Unavailable*)**: Sedang dipakai jadwal penuh.
-- **Spesifikasi Sarana**: Lokasi gedung, kapasitas orang/peserta, dan jam operasional harian.
+### 1.4. Infrastructure & Facilities (`/fasilitas`)
+- **Workshops & Laboratories Gallery**: High-resolution photography of student practice facilities and rental spaces.
+- **Real-Time Availability Badges**:
+  - **Available**: The facility is open and ready for scheduling or rental.
+  - **Maintenance**: Undergoing maintenance, repair, or tool calibration.
+  - **Unavailable**: Fully booked or temporarily closed.
+- **Facility Specifications**: Building location, seating/participant capacity, and daily operating hours.
 
 ---
 
-### 1.5. Warta Berita & Kegiatan Sekolah (`/berita` & `/berita/{slug}`)
-- **Katalog Artikel**: Berita terbitan resmi dengan penataan grid modern.
-- **Pencarian & Filter**: Pencarian artikel berdasarkan kata kunci judul dan pemilihan kategori warta.
-- **Halaman Baca Warta (`/berita/{slug}`)**:
-  - URL ramah SEO berbasis slug unik (`cviebrock/eloquent-sluggable`).
-  - Metadata penulis, tanggal terbit, kategori, dan tag label.
-  - Format isi artikel kaya teks (paragraf, kutipan, list).
-  - Galeri dokumentasi foto kegiatan pendukung.
-  - Rekomendasi warta berita terkait di bagian sidebar.
+### 1.5. News & School Activities (`/berita` & `/berita/{slug}`)
+- **Article Catalog**: Official news publications arranged in a modern grid layout.
+- **Search & Filter**: Keyword search on article titles and category-based filtering.
+- **Article Reader Page (`/berita/{slug}`)**:
+  - SEO-friendly URLs using unique slugs (`cviebrock/eloquent-sluggable`).
+  - Metadata including author, publication date, category, and topical tags.
+  - Rich-text formatted body (paragraphs, quotes, lists).
+  - Supplemental activity photo gallery.
+  - Related news suggestions in the sidebar.
 
 ---
 
-### 1.6. Bagan Struktur Organisasi (`/organigram`)
-- **Visualisasi Hierarki Pohon**: Menampilkan susunan pengelola BLUD dari tingkat pimpinan puncak (Kepala Sekolah/BLUD), kepala unit produksi, bendahara, hingga ketua divisi.
-- **Kartu Pejabat**: Dilengkapi foto formal, nama lengkap beserta gelar, posisi struktural, departemen, dan uraian tugas pokok.
+### 1.6. Organizational Structure (`/organigram`)
+- **Hierarchical Tree Visualization**: Visual display of the BLUD administrative hierarchy from leadership (Principal/Director) down to department coordinators and staff.
+- **Personnel Cards**: Formal portrait, full name with academic titles, structural role, department, and summary of primary responsibilities.
 
 ---
 
-### 1.7. Kontak Resmi & Denah Lokasi (`/kontak`)
-- **Formulir Pengiriman Pesan Langsung**: Form pesan masyarakat yang otomatis masuk ke *Inbox Admin*.
-- **Informasi Kontak Lengkap**: Alamat, nomor telepon kantor, no. WhatsApp layanan, dan email resmi.
-- **Google Maps Terintegrasi**: Peta interaktif SMKN 2 Purwakarta memudahkan kunjungan langsung ke lokasi sekolah.
+### 1.7. Contact Us & Location Map (`/kontak`)
+- **Direct Message Submission Form**: Public inquiry and partnership request form delivered straight to the *Admin Inbox*.
+- **Comprehensive Contact Details**: Campus address, telephone numbers, official WhatsApp helpdesk, and institutional email.
+- **Integrated Google Maps**: Interactive map of SMKN 2 Purwakarta for easy navigation and campus visits.
 
 ---
 
-##  2. Modul Panel Administrasi (Admin Dashboard)
+## 2. Administration Panel (Admin Dashboard)
 
-Panel kontrol khusus administrator yang diamankan dengan `AdminMiddleware` di route `/admin/*`.
+A secure management control center guarded by `AdminMiddleware` on `/admin/*` routes.
 
 ```mermaid
 graph TD
     AdminPanel[Admin Control Panel /admin/*]
     
-    AdminPanel --> Dash[1. Dashboard & Ringkasan Metrik]
-    AdminPanel --> ProfileAdmin[2. Manajemen Profil BLUD]
-    AdminPanel --> ServiceAdmin[3. CRUD Layanan Unit Usaha]
-    AdminPanel --> FacilityAdmin[4. CRUD Sarana & Fasilitas]
-    AdminPanel --> NewsAdmin[5. Manajemen Berita & Media]
-    AdminPanel --> OrgAdmin[6. Manajemen Organigram Tree]
-    AdminPanel --> MsgAdmin[7. Kotak Masuk Pesan Kontak]
-    AdminPanel --> UserAdmin[8. Manajemen Pengguna & Role]
-    AdminPanel --> LogAdmin[9. Audit Log Aktivitas Sistem]
+    AdminPanel --> Dash[1. Summary Dashboard & Metrics]
+    AdminPanel --> ProfileAdmin[2. BLUD Profile Management]
+    AdminPanel --> ServiceAdmin[3. Vocational Services CRUD]
+    AdminPanel --> FacilityAdmin[4. Facilities & Labs CRUD]
+    AdminPanel --> NewsAdmin[5. News & Media Management]
+    AdminPanel --> OrgAdmin[6. Organigram Tree Management]
+    AdminPanel --> MsgAdmin[7. Contact Messages Inbox]
+    AdminPanel --> UserAdmin[8. User & Role Management]
+    AdminPanel --> LogAdmin[9. System Activity Audit Logs]
 ```
 
-### 2.1. Dashboard Utama (`/admin/dashboard`)
-- **Kartu Statistik Ringkas**:
-  - Total Layanan Aktif.
-  - Total Sarana/Fasilitas.
-  - Total Warta Berita Terbit.
-  - Pesan Kontak Baru yang belum dibaca.
-- **Log Aktivitas Terkini**: Tabel 5–10 aksi terakhir administrator untuk pemantauan sistem secara *real-time*.
+### 2.1. Main Dashboard (`/admin/dashboard`)
+- **Summary Statistical Cards**:
+  - Total Active Services.
+  - Total Facilities.
+  - Total Published News Articles.
+  - Unread Contact Messages.
+- **Real-Time Activity Feed**: Table of recent administrative actions for immediate operational visibility.
 
 ---
 
-### 2.2. Manajemen Profil Lembaga (`/admin/profiles`)
-- **Editor Identitas BLUD**: Mengubah nama instansi, alamat lengkap, kontak, email, dan website.
-- **Kelola Legalitas & Visi Misi**: Memperbarui dasar hukum SK BLUD, visi, dan misi.
-- **Media Profil**: Upload berkas logo sekolah, foto sejarah, serta foto dan teks sambutan Kepala Sekolah.
+### 2.2. Institutional Profile Management (`/admin/profiles`)
+- **BLUD Identity Editor**: Update institution name, official address, telephone, email, and website.
+- **Legal Foundation & Vision/Mission**: Edit BLUD legal decrees, vision, and mission statements.
+- **Profile Media Assets**: Upload school logos, historical archive photos, and the principal's official greeting portrait.
 
 ---
 
-### 2.3. Manajemen Layanan Unit Produksi (`/admin/services`)
-- **Operasi CRUD Lengkap**: Tambah baru, edit data, lihat detail, dan hapus layanan.
-- **Upload Brosur / Foto Produk**: Mendukung format gambar JPG, PNG, WebP.
-- **Toggle Status Instan**: Mengubah status `active` / `inactive` secara cepat tanpa reload halaman (*AJAX PATCH*).
+### 2.3. Vocational Services Management (`/admin/services`)
+- **Full CRUD Functionality**: Create, edit, inspect details, and delete services.
+- **Brochure & Photo Uploads**: Supports JPG, PNG, and WebP image formats.
+- **Instant Status Toggle**: Fast switching between `active` and `inactive` states without page reloads (*AJAX PATCH*).
 
 ---
 
-### 2.4. Manajemen Sarana & Fasilitas (`/admin/facilities`)
-- **Operasi CRUD Lengkap**: Tambah, edit, dan hapus ruang bengkel / lab / sarana.
-- **Pengaturan Jam & Kapasitas**: Konfigurasi daya tampung dan jadwal buka operasional.
-- **Status Switcher AJAX**: Tombol cepat untuk mengubah status kondisi menjadi `available`, `maintenance`, atau `unavailable`.
+### 2.4. Facilities & Labs Management (`/admin/facilities`)
+- **Full CRUD Functionality**: Create, edit, and delete workshops, labs, and spaces.
+- **Operating Hours & Capacity**: Manage room dimensions, seating limits, and schedules.
+- **AJAX Status Switcher**: Quick toggle between `available`, `maintenance`, and `unavailable`.
 
 ---
 
-### 2.5. Manajemen Warta Berita & Galeri (`/admin/news`)
-- **Penerbitan Berita**: Pembuatan artikel baru dengan sistem auto-slug dari judul.
-- **Alur Status Publikasi**:
-  - `draft`: Masih dalam penulisan / revisi.
-  - `published`: Sudah tayang di portal publik.
-  - `archived`: Diarsipkan dari halaman utama namun tetap tersimpan.
-- **Aksi Publikasi Satu Klik**: Tombol *Publish* (`/news/{id}/publish`) dan *Archive* (`/news/{id}/archive`).
-- **Kelola Galeri Foto**: Tambah foto dokumentasi kegiatan tambahan pada setiap berita.
+### 2.5. News & Media Management (`/admin/news`)
+- **Article Publishing**: Create new posts with automatic slug generation from the title.
+- **Publishing Status Workflow**:
+  - `draft`: Work in progress / under review.
+  - `published`: Publicly visible on the portal.
+  - `archived`: Hidden from main listings but preserved in database.
+- **One-Click Publishing Actions**: Fast action buttons to *Publish* (`/news/{id}/publish`) and *Archive* (`/news/{id}/archive`).
+- **Photo Gallery Management**: Attach additional event documentation photos to any article.
 
 ---
 
-### 2.6. Manajemen Struktur Organisasi (`/admin/organigrams`)
-- **Penyusunan Hierarki**: Memilih atasan langsung (*parent*) untuk membentuk struktur pohon organisasi.
-- **Pengaturan Level (*Order Number*)**: Mengatur nomor urut tampil dari level direktur hingga staf pelaksana.
-- **API Struktur Pohon (`/admin/organigrams-tree`)**: Menghasilkan format JSON pohon untuk integrasi bagan dinamis.
+### 2.6. Organizational Structure Management (`/admin/organigrams`)
+- **Hierarchy Builder**: Assign direct supervisors (*parent*) to construct the organizational tree.
+- **Order Numbering**: Adjust display hierarchy from top executive leadership to division staff.
+- **Tree Structure API (`/admin/organigrams-tree`)**: Returns JSON tree data for dynamic organizational charts.
 
 ---
 
-### 2.7. Kotak Masuk Pesan Pengunjung (`/admin/contact-messages`)
-- **Daftar Pesan Masuk**: Menampilkan daftar pertanyaan dan proposal kerjasama dari publik.
-- **Badge Status Penanganan**:
-  -  `new`: Pesan baru belum dibaca.
-  -  `read`: Pesan sudah dibuka dan dibaca admin.
-  -  `replied`: Pesan telah selesai dibalas / ditindaklanjuti.
-- **Aksi Cepat Balas**: Tautan langsung untuk membalas pengirim via email atau nomor WhatsApp.
+### 2.7. Contact Messages Inbox (`/admin/contact-messages`)
+- **Inbound Message Feed**: Displays inquiries and cooperation proposals submitted by the public.
+- **Status Tracking**:
+  - `new`: Unread message.
+  - `read`: Opened and reviewed by an administrator.
+  - `replied`: Answered and resolved.
+- **Quick Reply Shortcuts**: One-click actions to respond via email or WhatsApp.
 
 ---
 
-### 2.8. Manajemen Pengguna & Hak Akses (`/admin/users`)
-- **Pengelolaan Akun**: Membuat akun admin baru, mengedit data user, atau menghapus pengguna.
-- **Toggle Aktif / Non-Aktif Akun**: Menolak akses login user tertentu secara instan melalui AJAX.
-- **Pengaturan Role Dinamis**: Mengubah peran user antara `admin` dan `viewer`.
-- **Proteksi Akun Sendiri**: Mencegah admin menghapus akun miliknya yang sedang aktif login.
+### 2.8. User & Access Control Management (`/admin/users`)
+- **Account Management**: Register new admin users, edit profile information, or remove accounts.
+- **Instant Account Suspend/Activate**: Suspend or reactivate user login privileges via AJAX.
+- **Dynamic Role Management**: Change user roles between `admin` and `viewer`.
+- **Self-Delete Protection**: Guards active administrators against accidental deletion of their own accounts.
 
 ---
 
-### 2.9. Audit Log Aktivitas Sistem (`/admin/activity-logs`)
-- **Pencatatan Otomatis**: Merekam setiap aktivitas krusial (login, create berita, edit layanan, hapus fasilitas, ubah role).
-- **Metadata Pelacakan**: Mencatat nama user, jenis aksi, deskripsi, alamat IP, dan User-Agent perangkat.
-- **Fitur Bersihkan Log (`/admin/activity-logs/clear`)**: Menghapus riwayat log lama yang berusia lebih dari 30 hari dalam satu klik untuk menghemat kapasitas basis data.
+### 2.9. System Activity Audit Logs (`/admin/activity-logs`)
+- **Automated Audit Trail**: Logs critical system actions (logins, article creation, service updates, facility changes, role adjustments).
+- **Tracking Metadata**: Captures username, action type, description, client IP address, and User-Agent strings.
+- **One-Click Log Purge (`/admin/activity-logs/clear`)**: Safely removes audit log entries older than 30 days to optimize database performance and storage.

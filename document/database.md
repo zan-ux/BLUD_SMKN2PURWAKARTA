@@ -1,28 +1,29 @@
-#  Dokumentasi Basis Data (Database) - BLUD SMKN 2 Purwakarta
-Dokumen ini menjelaskan struktur arsitektur basis data, Entity Relationship Diagram (ERD), skema tabel lengkap, Model Eloquent, relasi antar entitas, serta pengelolaan migrasi dan data seeder pada sistem informasi **BLUD SMKN 2 Purwakarta**.
+# Database Documentation - BLUD SMKN 2 Purwakarta
+
+This document describes the database architecture, Entity Relationship Diagram (ERD), full table schemas, Eloquent Models, data relationships, and migration/seeding procedures for the **BLUD SMKN 2 Purwakarta** system.
 
 ---
 
-##  1. Diagram Hubungan Entitas (ERD)
+## 1. Entity Relationship Diagram (ERD)
 
 ```mermaid
 erDiagram
-    USERS ||--o{ ACTIVITY_LOGS : "mencatat"
-    USERS ||--o{ PROFILES : "mengelola"
-    USERS ||--o{ NEWS : "menulis"
+    USERS ||--o{ ACTIVITY_LOGS : "records"
+    USERS ||--o{ PROFILES : "manages"
+    USERS ||--o{ NEWS : "authors"
     
-    PROFILES ||--o{ SERVICES : "memiliki"
-    PROFILES ||--o{ FACILITIES : "memiliki"
-    PROFILES ||--o{ ORGANIGRAMS : "memiliki"
-    PROFILES ||--o{ NEWS : "menerbitkan"
-    PROFILES ||--o{ CONTACT_MESSAGES : "menerima"
+    PROFILES ||--o{ SERVICES : "offers"
+    PROFILES ||--o{ FACILITIES : "maintains"
+    PROFILES ||--o{ ORGANIGRAMS : "structures"
+    PROFILES ||--o{ NEWS : "publishes"
+    PROFILES ||--o{ CONTACT_MESSAGES : "receives"
 
-    SERVICE_CATEGORIES ||--o{ SERVICES : "mengelompokkan"
-    FACILITY_CATEGORIES ||--o{ FACILITIES : "mengelompokkan"
+    SERVICE_CATEGORIES ||--o{ SERVICES : "categorizes"
+    FACILITY_CATEGORIES ||--o{ FACILITIES : "categorizes"
 
-    NEWS ||--o{ NEWS_GALLERY : "memiliki foto tambahan"
+    NEWS ||--o{ NEWS_GALLERY : "contains supplemental photos"
 
-    ORGANIGRAMS ||--o{ ORGANIGRAMS : "hierarki atasan-bawahan"
+    ORGANIGRAMS ||--o{ ORGANIGRAMS : "superior-subordinate hierarchy"
 
     USERS {
         bigint id PK
@@ -161,198 +162,198 @@ erDiagram
 
 ---
 
-##  2. Skema Tabel Terinci
+## 2. Detailed Table Schemas
 
-### 2.1. Tabel `users`
-Menyimpan data akun pengguna baik administrator maupun pengunjung/viewer, termasuk data autentikasi Google SSO.
+### 2.1. `users` Table
+Stores user accounts for both administrators and general viewers, including Google SSO authentication data.
 
-| Kolom | Tipe Data | Keterangan | Atribut / Index |
+| Column | Data Type | Description | Attributes / Index |
 |---|---|---|---|
 | `id` | BIGINT UNSIGNED | Primary Key | Auto Increment, PK |
-| `name` | VARCHAR(255) | Nama lengkap pengguna | NOT NULL |
-| `email` | VARCHAR(255) | Alamat email unik | NOT NULL, UNIQUE |
-| `password` | VARCHAR(255) | Hash password (bcrypt) | NOT NULL |
-| `phone` | VARCHAR(20) | Nomor telepon/WhatsApp aktif | NOT NULL |
-| `role` | ENUM('admin', 'viewer') | Hak akses sistem | DEFAULT 'viewer' |
-| `is_active` | BOOLEAN | Status aktif akun | DEFAULT TRUE |
-| `google_id` | VARCHAR(255) | ID identitas dari Google OAuth | NULLABLE, UNIQUE |
-| `avatar` | VARCHAR(255) | URL/path foto profil | NULLABLE |
-| `remember_token` | VARCHAR(100) | Token sesi login otomatis | NULLABLE |
-| `created_at` | TIMESTAMP | Waktu pembuatan akun | NULLABLE |
-| `updated_at` | TIMESTAMP | Waktu pembaruan terakhir | NULLABLE |
+| `name` | VARCHAR(255) | Full name | NOT NULL |
+| `email` | VARCHAR(255) | Unique email address | NOT NULL, UNIQUE |
+| `password` | VARCHAR(255) | Hashed password (bcrypt) | NOT NULL |
+| `phone` | VARCHAR(20) | Active phone/WhatsApp number | NOT NULL |
+| `role` | ENUM('admin', 'viewer') | System access role | DEFAULT 'viewer' |
+| `is_active` | BOOLEAN | Account active status | DEFAULT TRUE |
+| `google_id` | VARCHAR(255) | Google OAuth identity ID | NULLABLE, UNIQUE |
+| `avatar` | VARCHAR(255) | Profile image URL/path | NULLABLE |
+| `remember_token` | VARCHAR(100) | Remember-me session token | NULLABLE |
+| `created_at` | TIMESTAMP | Creation timestamp | NULLABLE |
+| `updated_at` | TIMESTAMP | Last update timestamp | NULLABLE |
 
 ---
 
-### 2.2. Tabel `profiles`
-Menyimpan data identitas kelembagaan BLUD SMKN 2 Purwakarta, visi-misi, sejarah, sambutan pimpinan, dan kontak resmi.
+### 2.2. `profiles` Table
+Stores institutional information for BLUD SMKN 2 Purwakarta, including vision, mission, history, principal's greeting, and official contacts.
 
-| Kolom | Tipe Data | Keterangan | Atribut / Index |
+| Column | Data Type | Description | Attributes / Index |
 |---|---|---|---|
 | `id` | BIGINT UNSIGNED | Primary Key | Auto Increment, PK |
-| `user_id` | BIGINT UNSIGNED | Relasi ke admin pembuat | FK -> users.id |
-| `institution_name` | VARCHAR(255) | Nama instansi (SMKN 2 Purwakarta) | NOT NULL |
-| `institution_type` | VARCHAR(100) | Jenis instansi (SMK Negeri / BLUD) | NOT NULL |
-| `address` | TEXT | Alamat lengkap sekolah | NOT NULL |
-| `city` | VARCHAR(100) | Kota/Kabupaten (Purwakarta) | NOT NULL |
-| `province` | VARCHAR(100) | Provinsi (Jawa Barat) | NOT NULL |
-| `postal_code` | VARCHAR(10) | Kode pos | NOT NULL |
-| `phone` | VARCHAR(20) | Nomor telepon kantor | NOT NULL |
-| `email` | VARCHAR(255) | Email korespondensi resmi | NOT NULL |
-| `website` | VARCHAR(255) | Alamat website resmi | NOT NULL |
-| `established_year` | YEAR | Tahun pendirian | NOT NULL |
-| `legal_basis` | VARCHAR(255) | Dasar hukum penetapan BLUD | NOT NULL |
-| `vision` | TEXT | Visi BLUD SMKN 2 Purwakarta | NOT NULL |
-| `mission` | TEXT | Misi BLUD SMKN 2 Purwakarta | NOT NULL |
-| `description` | TEXT | Gambaran umum / sejarah BLUD | NOT NULL |
-| `sambutan` | TEXT | Teks sambutan Kepala Sekolah | NULLABLE |
-| `nama_kepala` | VARCHAR(255) | Nama Kepala Sekolah beserta gelar | NULLABLE |
-| `logo` | VARCHAR(255) | Path berkas logo institusi | NULLABLE |
-| `foto_sejarah` | VARCHAR(255) | Path foto dokumentasi sejarah | NULLABLE |
-| `foto_sambutan` | VARCHAR(255) | Path foto Kepala Sekolah | NULLABLE |
-| `created_at` / `updated_at` | TIMESTAMP | Waktu audit sistem | NULLABLE |
+| `user_id` | BIGINT UNSIGNED | Relation to authoring admin | FK -> users.id |
+| `institution_name` | VARCHAR(255) | Institution name (SMKN 2 Purwakarta) | NOT NULL |
+| `institution_type` | VARCHAR(100) | Institution type (SMK Negeri / BLUD) | NOT NULL |
+| `address` | TEXT | Campus address | NOT NULL |
+| `city` | VARCHAR(100) | City/Regency (Purwakarta) | NOT NULL |
+| `province` | VARCHAR(100) | Province (Jawa Barat) | NOT NULL |
+| `postal_code` | VARCHAR(10) | Postal code | NOT NULL |
+| `phone` | VARCHAR(20) | Office phone number | NOT NULL |
+| `email` | VARCHAR(255) | Official correspondence email | NOT NULL |
+| `website` | VARCHAR(255) | Official website URL | NOT NULL |
+| `established_year` | YEAR | Founding year | NOT NULL |
+| `legal_basis` | VARCHAR(255) | Legal decree basis of BLUD | NOT NULL |
+| `vision` | TEXT | BLUD vision statement | NOT NULL |
+| `mission` | TEXT | BLUD mission statements | NOT NULL |
+| `description` | TEXT | General description / history | NOT NULL |
+| `sambutan` | TEXT | Principal's welcoming speech | NULLABLE |
+| `nama_kepala` | VARCHAR(255) | Principal's full name & title | NULLABLE |
+| `logo` | VARCHAR(255) | Institutional logo file path | NULLABLE |
+| `foto_sejarah` | VARCHAR(255) | Historical photo file path | NULLABLE |
+| `foto_sambutan` | VARCHAR(255) | Principal's portrait file path | NULLABLE |
+| `created_at` / `updated_at` | TIMESTAMP | System audit timestamps | NULLABLE |
 
 ---
 
-### 2.3. Tabel `services` & `service_categories`
-Menyimpan katalog produk dan jasa unggulan unit produksi BLUD.
+### 2.3. `services` & `service_categories` Tables
+Stores the catalog of vocational products and services offered by the BLUD production units.
 
-**Tabel `services`:**
-| Kolom | Tipe Data | Keterangan | Atribut |
+**`services` Table:**
+| Column | Data Type | Description | Attributes |
 |---|---|---|---|
 | `id` | BIGINT UNSIGNED | Primary Key | Auto Increment, PK |
-| `profile_id` | BIGINT UNSIGNED | Relasi ke profil instansi | FK -> profiles.id |
-| `name` | VARCHAR(255) | Nama layanan / unit usaha | NOT NULL |
-| `category` | VARCHAR(100) | Nama kategori layanan | NOT NULL |
-| `description` | TEXT | Deskripsi lengkap layanan | NOT NULL |
-| `image` | VARCHAR(255) | Path gambar brosur/foto | NULLABLE |
-| `price` | DECIMAL(12,2) | Tarif layanan / estimasi harga | NULLABLE |
-| `duration` | VARCHAR(100) | Estimasi waktu pengerjaan | NULLABLE |
-| `requirements` | TEXT | Syarat pemesanan / berkas | NULLABLE |
-| `is_online` | BOOLEAN | Apakah bisa dipesan daring | DEFAULT FALSE |
-| `status` | ENUM('active', 'inactive') | Status ketersediaan layanan | DEFAULT 'active' |
-| `created_at` / `updated_at` | TIMESTAMP | Audit log | NULLABLE |
+| `profile_id` | BIGINT UNSIGNED | Relation to institutional profile | FK -> profiles.id |
+| `name` | VARCHAR(255) | Service or product name | NOT NULL |
+| `category` | VARCHAR(100) | Category name | NOT NULL |
+| `description` | TEXT | Detailed service description | NOT NULL |
+| `image` | VARCHAR(255) | Brochure/photo file path | NULLABLE |
+| `price` | DECIMAL(12,2) | Rate or price estimate | NULLABLE |
+| `duration` | VARCHAR(100) | Estimated completion duration | NULLABLE |
+| `requirements` | TEXT | Booking/order prerequisites | NULLABLE |
+| `is_online` | BOOLEAN | Available for online ordering | DEFAULT FALSE |
+| `status` | ENUM('active', 'inactive') | Service availability status | DEFAULT 'active' |
+| `created_at` / `updated_at` | TIMESTAMP | Audit timestamps | NULLABLE |
 
-**Tabel `service_categories`:**
-| Kolom | Tipe Data | Keterangan |
+**`service_categories` Table:**
+| Column | Data Type | Description |
 |---|---|---|
 | `id` | BIGINT UNSIGNED | Primary Key |
-| `name` | VARCHAR(255) | Nama kategori |
-| `slug` | VARCHAR(255) | Slug unik |
-| `description` | TEXT | Deskripsi kategori |
+| `name` | VARCHAR(255) | Category name |
+| `slug` | VARCHAR(255) | Unique slug |
+| `description` | TEXT | Category description |
 
 ---
 
-### 2.4. Tabel `facilities` & `facility_categories`
-Menyimpan data sarana, prasarana, bengkel kerja, lab komputer, dan ruang sewa.
+### 2.4. `facilities` & `facility_categories` Tables
+Stores infrastructure data, workshops, computer labs, and rentable spaces.
 
-**Tabel `facilities`:**
-| Kolom | Tipe Data | Keterangan | Atribut |
+**`facilities` Table:**
+| Column | Data Type | Description | Attributes |
 |---|---|---|---|
 | `id` | BIGINT UNSIGNED | Primary Key | Auto Increment, PK |
-| `profile_id` | BIGINT UNSIGNED | Relasi ke profil instansi | FK -> profiles.id |
-| `name` | VARCHAR(255) | Nama fasilitas / laboratorium | NOT NULL |
-| `category` | VARCHAR(100) | Kategori sarana | NOT NULL |
-| `description` | TEXT | Penjelasan fasilitas & alat | NOT NULL |
-| `image` | VARCHAR(255) | Foto sarana / ruangan | NULLABLE |
-| `location` | VARCHAR(255) | Posisi gedung/ruangan | NOT NULL |
-| `capacity` | INTEGER | Kapasitas pengguna/orang | NOT NULL |
-| `operating_hours`| VARCHAR(100) | Jam operasional | NOT NULL |
-| `status` | ENUM('available', 'maintenance', 'unavailable') | Status kondisi fasilitas | DEFAULT 'available' |
-| `created_at` / `updated_at` | TIMESTAMP | Audit log | NULLABLE |
+| `profile_id` | BIGINT UNSIGNED | Relation to institutional profile | FK -> profiles.id |
+| `name` | VARCHAR(255) | Facility / laboratory name | NOT NULL |
+| `category` | VARCHAR(100) | Facility category | NOT NULL |
+| `description` | TEXT | Description & equipment specifications | NOT NULL |
+| `image` | VARCHAR(255) | Photo file path | NULLABLE |
+| `location` | VARCHAR(255) | Building/room location | NOT NULL |
+| `capacity` | INTEGER | User/seating capacity | NOT NULL |
+| `operating_hours`| VARCHAR(100) | Operating hours | NOT NULL |
+| `status` | ENUM('available', 'maintenance', 'unavailable') | Facility status | DEFAULT 'available' |
+| `created_at` / `updated_at` | TIMESTAMP | Audit timestamps | NULLABLE |
 
 ---
 
-### 2.5. Tabel `news` & `gallery` (NewsGallery)
-Menyimpan artikel warta berita, liputan kegiatan, dan dokumentasi foto.
+### 2.5. `news` & `gallery` (NewsGallery) Tables
+Stores articles, news publications, activity coverage, and supplemental media.
 
-**Tabel `news`:**
-| Kolom | Tipe Data | Keterangan | Atribut |
+**`news` Table:**
+| Column | Data Type | Description | Attributes |
 |---|---|---|---|
 | `id` | BIGINT UNSIGNED | Primary Key | Auto Increment, PK |
-| `profile_id` | BIGINT UNSIGNED | Relasi profil instansi | FK -> profiles.id |
-| `created_by` | BIGINT UNSIGNED | ID penulis berita | FK -> users.id |
-| `title` | VARCHAR(255) | Judul warta | NOT NULL |
-| `slug` | VARCHAR(255) | URL-friendly slug unik | NOT NULL, UNIQUE |
-| `content` | LONGTEXT | Isi artikel lengkap | NOT NULL |
-| `image` | VARCHAR(255) | Foto sampul utama | NULLABLE |
-| `category` | VARCHAR(100) | Kategori berita | NOT NULL |
-| `tags` | JSON | Label / tags warta | NULLABLE |
-| `status` | ENUM('draft', 'published', 'archived') | Status publikasi | DEFAULT 'draft' |
-| `published_at` | DATETIME | Waktu rilis tayang | NULLABLE |
-| `created_at` / `updated_at` | TIMESTAMP | Audit log | NULLABLE |
+| `profile_id` | BIGINT UNSIGNED | Relation to profile | FK -> profiles.id |
+| `created_by` | BIGINT UNSIGNED | Author user ID | FK -> users.id |
+| `title` | VARCHAR(255) | Article headline | NOT NULL |
+| `slug` | VARCHAR(255) | Unique URL slug | NOT NULL, UNIQUE |
+| `content` | LONGTEXT | Full article body content | NOT NULL |
+| `image` | VARCHAR(255) | Header/cover image path | NULLABLE |
+| `category` | VARCHAR(100) | Article category | NOT NULL |
+| `tags` | JSON | Topical tags array | NULLABLE |
+| `status` | ENUM('draft', 'published', 'archived') | Publication status | DEFAULT 'draft' |
+| `published_at` | DATETIME | Publication timestamp | NULLABLE |
+| `created_at` / `updated_at` | TIMESTAMP | Audit timestamps | NULLABLE |
 
-**Tabel `gallery` (NewsGallery):**
-| Kolom | Tipe Data | Keterangan |
+**`gallery` Table (NewsGallery):**
+| Column | Data Type | Description |
 |---|---|---|
 | `id` | BIGINT UNSIGNED | Primary Key |
-| `news_id` | BIGINT UNSIGNED | Relasi ke warta berita (FK) |
-| `image_path` | VARCHAR(255) | Berkas gambar tambahan |
-| `caption` | VARCHAR(255) | Keterangan foto |
+| `news_id` | BIGINT UNSIGNED | Relation to news article (FK) |
+| `image_path` | VARCHAR(255) | Image file path |
+| `caption` | VARCHAR(255) | Photo caption |
 
 ---
 
-### 2.6. Tabel `organigrams`
-Menyimpan data struktur organisasi pengelola BLUD dalam format hierarki pohon (*tree structure*).
+### 2.6. `organigrams` Table
+Stores the administrative and organizational hierarchy in a tree structure.
 
-| Kolom | Tipe Data | Keterangan | Atribut |
+| Column | Data Type | Description | Attributes |
 |---|---|---|---|
 | `id` | BIGINT UNSIGNED | Primary Key | Auto Increment, PK |
-| `profile_id` | BIGINT UNSIGNED | Relasi profil instansi | FK -> profiles.id |
-| `name` | VARCHAR(255) | Nama pejabat / pengurus | NOT NULL |
-| `position` | VARCHAR(255) | Jabatan / posisi struktural | NOT NULL |
-| `department` | VARCHAR(255) | Divisi / unit kerja | NOT NULL |
-| `parent_id` | BIGINT UNSIGNED | Relasi ke atasan langsung | Self-referencing FK -> organigrams.id (NULL = Pucuk) |
-| `photo` | VARCHAR(255) | Foto resmi pengurus | NULLABLE |
-| `description` | TEXT | Tugas pokok dan fungsi | NULLABLE |
-| `order_number` | INTEGER | Urutan tampilan / level | DEFAULT 0 |
-| `created_at` / `updated_at` | TIMESTAMP | Audit log | NULLABLE |
+| `profile_id` | BIGINT UNSIGNED | Relation to profile | FK -> profiles.id |
+| `name` | VARCHAR(255) | Official's name | NOT NULL |
+| `position` | VARCHAR(255) | Position / title | NOT NULL |
+| `department` | VARCHAR(255) | Division / department | NOT NULL |
+| `parent_id` | BIGINT UNSIGNED | Direct supervisor relation | Self-referencing FK -> organigrams.id (NULL = Root) |
+| `photo` | VARCHAR(255) | Portrait photo file path | NULLABLE |
+| `description` | TEXT | Responsibilities & job description | NULLABLE |
+| `order_number` | INTEGER | Display sequence / priority | DEFAULT 0 |
+| `created_at` / `updated_at` | TIMESTAMP | Audit timestamps | NULLABLE |
 
 ---
 
-### 2.7. Tabel `contact_messages`
-Menyimpan formulir pesan, pertanyaan, dan permohonan kerjasama dari masyarakat/industri.
+### 2.7. `contact_messages` Table
+Stores contact form submissions, inquiries, and business proposals from visitors.
 
-| Kolom | Tipe Data | Keterangan | Atribut |
+| Column | Data Type | Description | Attributes |
 |---|---|---|---|
 | `id` | BIGINT UNSIGNED | Primary Key | Auto Increment, PK |
-| `profile_id` | BIGINT UNSIGNED | Relasi profil instansi | FK -> profiles.id |
-| `name` | VARCHAR(255) | Nama pengirim | NOT NULL |
-| `email` | VARCHAR(255) | Email pengirim | NOT NULL |
-| `phone` | VARCHAR(20) | Nomor kontak pengirim | NOT NULL |
-| `subject` | VARCHAR(255) | Perihal / subjek pesan | NOT NULL |
-| `message` | TEXT | Isi pesan pertanyaan/proposal | NOT NULL |
-| `status` | ENUM('new', 'read', 'replied') | Status penanganan pesan | DEFAULT 'new' |
-| `created_at` / `updated_at` | TIMESTAMP | Audit log | NULLABLE |
+| `profile_id` | BIGINT UNSIGNED | Relation to profile | FK -> profiles.id |
+| `name` | VARCHAR(255) | Sender's full name | NOT NULL |
+| `email` | VARCHAR(255) | Sender's email address | NOT NULL |
+| `phone` | VARCHAR(20) | Sender's contact number | NOT NULL |
+| `subject` | VARCHAR(255) | Message subject | NOT NULL |
+| `message` | TEXT | Message body text | NOT NULL |
+| `status` | ENUM('new', 'read', 'replied') | Handling status | DEFAULT 'new' |
+| `created_at` / `updated_at` | TIMESTAMP | Audit timestamps | NULLABLE |
 
 ---
 
-### 2.8. Tabel `activity_logs`
-Menyimpan jejak audit (*audit trail*) setiap aktivitas krusial yang dilakukan admin/user pada sistem.
+### 2.8. `activity_logs` Table
+Maintains an audit trail of critical administrator and user actions across the system.
 
-| Kolom | Tipe Data | Keterangan | Atribut |
+| Column | Data Type | Description | Attributes |
 |---|---|---|---|
 | `id` | BIGINT UNSIGNED | Primary Key | Auto Increment, PK |
-| `user_id` | BIGINT UNSIGNED | Pengguna pelaku aktivitas | FK -> users.id |
-| `action` | VARCHAR(255) | Jenis aksi (misal: CREATE_NEWS, LOGIN) | NOT NULL |
-| `description` | TEXT | Rincian aktivitas | NOT NULL |
-| `ip_address` | VARCHAR(45) | Alamat IP klien (IPv4/IPv6) | NULLABLE |
-| `user_agent` | TEXT | Informasi browser/perangkat | NULLABLE |
-| `created_at` / `updated_at` | TIMESTAMP | Waktu terjadinya aksi | NULLABLE |
+| `user_id` | BIGINT UNSIGNED | User performing action | FK -> users.id |
+| `action` | VARCHAR(255) | Action key (e.g., CREATE_NEWS, LOGIN) | NOT NULL |
+| `description` | TEXT | Activity description | NOT NULL |
+| `ip_address` | VARCHAR(45) | Client IP address (IPv4/IPv6) | NULLABLE |
+| `user_agent` | TEXT | Browser / device information | NULLABLE |
+| `created_at` / `updated_at` | TIMESTAMP | Action timestamp | NULLABLE |
 
 ---
 
-### 2.9. Tabel Pendukung Framework Laravel
-- **`sessions`**: Manajemen session penyimpanan berbasis database.
-- **`cache` & `cache_locks`**: Penyimpanan cache performa tinggi.
-- **`jobs`**, **`job_batches`**, **`failed_jobs`**: Antrian proses asynchronous background (*queue system*).
+### 2.9. Framework Supporting Tables
+- **`sessions`**: Database-backed user session storage.
+- **`cache` & `cache_locks`**: High-performance caching storage.
+- **`jobs`**, **`job_batches`**, **`failed_jobs`**: Asynchronous background queue processing.
 
 ---
 
-##  3. Model Eloquent & Relasi Data
+## 3. Eloquent Models & Data Relationships
 
-Seluruh model berada di direktori `app/Models/`:
+All models reside in `app/Models/`:
 
-| Nama Model | Berkas Model | Relasi Utama |
+| Model Name | Model File | Key Relationships |
 |---|---|---|
 | **`User`** | `app/Models/User.php` | `hasMany(ActivityLog)`, `hasMany(News, 'created_by')`, `hasOne(Profile)` |
 | **`Profile`** | `app/Models/Profile.php` | `belongsTo(User)`, `hasMany(Service)`, `hasMany(Facility)`, `hasMany(Organigram)`, `hasMany(News)`, `hasMany(ContactMessage)` |
@@ -368,22 +369,22 @@ Seluruh model berada di direktori `app/Models/`:
 
 ---
 
-##  4. Data Seeder & Inisialisasi
+## 4. Seeders & Data Initialization
 
-Untuk mengisi data awal instansi SMKN 2 Purwakarta, seeder yang tersedia di folder `database/seeders/` mencakup:
+Seeders in `database/seeders/` include:
 
 1. **`AdminUserSeeder`**:
-   - Akun Super Admin: `admin@smkn2purwakarta.sch.id` (Password: `password`, Role: `admin`)
-   - Akun Pengunjung Demo: `viewer@smkn2purwakarta.sch.id` (Password: `password`, Role: `viewer`)
+   - Super Admin account: `admin@smkn2purwakarta.sch.id` (Password: `password`, Role: `admin`)
+   - Demo Visitor account: `viewer@smkn2purwakarta.sch.id` (Password: `password`, Role: `viewer`)
 2. **`InitialDataSeeder` / `HomeSectionSeeder`**:
-   - Data profil resmi BLUD SMKN 2 Purwakarta (Visi, Misi, Alamat, SK Legalitas).
-   - Kategori & data awal layanan unit produksi (Teaching Factory).
-   - Kategori & data fasilitas laboratorium / bengkel kerja.
-   - Struktur bagan organisasi kepemimpinan BLUD.
-   - Contoh artikel berita awal dan kegiatan sekolah.
+   - Official BLUD SMKN 2 Purwakarta profile data (Vision, Mission, Address, Legal Decree).
+   - Initial categories & vocational service offerings (Teaching Factory).
+   - Facility and laboratory categories and items.
+   - BLUD leadership organizational chart structure.
+   - Initial news articles and activity updates.
 
-### Cara Menjalankan Migrasi & Seeder:
+### Running Migrations & Seeders:
 ```bash
-# Menjalankan seluruh migrasi dari awal beserta data bawaan
+# Run all migrations from scratch and seed initial data
 php artisan migrate:fresh --seed
 ```

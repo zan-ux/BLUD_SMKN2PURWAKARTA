@@ -1,54 +1,54 @@
-# 🔐Dokumentasi Autentikasi & Otorisasi - BLUD SMKN 2 Purwakarta
+# Authentication & Authorization Documentation - BLUD SMKN 2 Purwakarta
 
-Dokumen ini menjelaskan mekanisme keamanan autentikasi pengguna (*authentication*), integrasi Google Single Sign-On (OAuth 2.0), kontrol hak akses berbasis peran (*Role-Based Access Control / RBAC*), dan proteksi middleware pada sistem informasi **BLUD SMKN 2 Purwakarta**.
+This document describes the user security architecture, authentication mechanisms, Google Single Sign-On (OAuth 2.0) integration, Role-Based Access Control (RBAC), and middleware protection implemented in the **BLUD SMKN 2 Purwakarta** system.
 
 ---
 
-##  1. Arsitektur Keamanan Pengguna
+## 1. User Security Architecture
 
-Sistem mengadopsi skema autentikasi ganda (*Hybrid Authentication*):
-1. **Autentikasi Tradisional**: Berbasis kombinasi email dan kata sandi lokal terenkripsi *Bcrypt Hash*.
-2. **Google OAuth 2.0 Single Sign-On (SSO)**: Mengizinkan login dan registrasi cepat menggunakan akun Google (khususnya email resmi sekolah atau umum).
+The system implements a **Hybrid Authentication** scheme:
+1. **Traditional Authentication**: Based on local email and password credentials hashed with *Bcrypt*.
+2. **Google OAuth 2.0 Single Sign-On (SSO)**: Allows quick login and registration using Google accounts (particularly school institutional email or personal Google accounts).
 
 ```mermaid
 graph TD
-    Start([Pengguna Masuk]) --> Choice{Metode Login?}
+    Start([User Visits Site]) --> Choice{Login Method?}
     
-    %% Alur Tradisional
-    Choice -->|Form Login Biasa| TradLogin[Input Email & Password]
-    TradLogin --> VerifyHash{Kredensial Valid & Aktif?}
-    VerifyHash -->|Tidak| FailLogin[Tampilkan Pesan Error]
-    VerifyHash -->|Ya| StartSession[Buat Sesi & Regenerate Session ID]
+    %% Traditional Flow
+    Choice -->|Standard Login Form| TradLogin[Enter Email & Password]
+    TradLogin --> VerifyHash{Credentials Valid & Active?}
+    VerifyHash -->|No| FailLogin[Display Error Message]
+    VerifyHash -->|Yes| StartSession[Create Session & Regenerate Session ID]
 
-    %% Alur Google SSO
-    Choice -->|Tombol Google SSO| GoogleRedirect[Redirect ke Google Auth Server]
-    GoogleRedirect --> GoogleConsent[User Menyetujui Akun Google]
-    GoogleConsent --> GoogleCallback[Google Mengirimkan Auth Code]
-    GoogleCallback --> TokenExchange[Pertukaran Code dengan Access Token]
-    TokenExchange --> FetchProfile[Ambil Data Nama, Email, Foto, Google ID]
-    FetchProfile --> CheckExist{Email Sudah Terdaftar?}
+    %% Google SSO Flow
+    Choice -->|Google SSO Button| GoogleRedirect[Redirect to Google Auth Server]
+    GoogleRedirect --> GoogleConsent[User Approves Google Account]
+    GoogleConsent --> GoogleCallback[Google Returns Authorization Code]
+    GoogleCallback --> TokenExchange[Exchange Code for Access Token]
+    TokenExchange --> FetchProfile[Fetch Name, Email, Avatar, Google ID]
+    FetchProfile --> CheckExist{Email Already Registered?}
     
-    CheckExist -->|Sudah Ada| AutoLogin[Login Pengguna & Buka Sesi]
-    CheckExist -->|Belum Ada| CompleteForm[Arahkan ke Form Kelengkapan No. HP]
-    CompleteForm --> SaveNewUser[Simpan User Baru Role 'viewer']
+    CheckExist -->|Existing User| AutoLogin[Log in User & Open Session]
+    CheckExist -->|New User| CompleteForm[Redirect to Complete Profile Form]
+    CompleteForm --> SaveNewUser[Save New User with 'viewer' Role]
     SaveNewUser --> StartSession
 
-    %% Penentuan Hak Akses
-    AutoLogin --> CheckRole{Role Pengguna?}
+    %% Role-Based Routing
+    AutoLogin --> CheckRole{User Role?}
     StartSession --> CheckRole
     
-    CheckRole -->|admin| AdminArea[Redirect ke /admin/dashboard]
-    CheckRole -->|viewer| PublicArea[Redirect ke Beranda / Portal Publik]
+    CheckRole -->|admin| AdminArea[Redirect to /admin/dashboard]
+    CheckRole -->|viewer| PublicArea[Redirect to Home / Public Portal]
 ```
 
 ---
 
-##  2. Alur Integrasi Google OAuth 2.0 (SSO)
+## 2. Google OAuth 2.0 (SSO) Integration Flow
 
-Pengelolaan Google SSO ditangani secara modular oleh `App\Http\Controllers\GoogleAuthController`:
+Google SSO is managed modularly by `App\Http\Controllers\GoogleAuthController`:
 
-### Langkah 1: Pengalihan Klien (`redirect()`)
-Saat pengguna menekan tombol *"Masuk dengan Google"*, controller membangun query URL otorisasi resmi Google:
+### Step 1: Client Redirection (`redirect()`)
+When a user clicks the *"Sign in with Google"* button, the controller constructs the official Google authorization URL:
 ```php
 $query = http_build_query([
     'client_id' => env('GOOGLE_CLIENT_ID'),
@@ -59,62 +59,62 @@ $query = http_build_query([
 return redirect('https://accounts.google.com/o/oauth2/v2/auth?' . $query);
 ```
 
-### Langkah 2: Penerimaan Callback & Pertukaran Token (`callback()`)
-Google mengembalikan `code` otorisasi ke URL redirect `http://localhost:8000/auth/google/callback`. Controller mengirimkan HTTP POST ke endpoint Google Token:
+### Step 2: Callback Reception & Token Exchange (`callback()`)
+Google redirects back with an authorization `code` to `http://localhost:8000/auth/google/callback`. The controller makes an HTTP POST request to exchange the code for tokens:
 - **Token Endpoint**: `https://oauth2.googleapis.com/token`
 - **Userinfo Endpoint**: `https://www.googleapis.com/oauth2/v2/userinfo`
 
-### Langkah 3: Penanganan Profil & Registrasi Akun Baru
-1. **User Lama**: Jika email dari Google sudah ada di tabel `users`, sistem langsung melakukan login otomatis (`Auth::login($existingUser)`).
-2. **User Baru**: Jika email belum ada di database:
-   - Data sementara (`name`, `email`, `avatar`, `google_id`) disimpan di session sementara `Session::put('google_user', ...)`.
-   - Pengguna diarahkan ke form kelengkapan nomor telepon aktif (`/google/complete-profile`).
-   - Setelah input nomor HP valid, user baru disimpan dengan password acak aman (*random 24 char hash*) dan role bawaan `viewer`.
+### Step 3: Profile Handling & New User Registration
+1. **Existing User**: If the email returned from Google already exists in the `users` table, the user is authenticated immediately (`Auth::login($existingUser)`).
+2. **New User**: If the email does not exist in the database:
+   - Temporary attributes (`name`, `email`, `avatar`, `google_id`) are stored in the session (`Session::put('google_user', ...)`).
+   - The user is redirected to the profile completion form to provide a valid phone number (`/google/complete-profile`).
+   - Upon submitting a valid phone number, the new user record is saved with a secure random password hash (*24-character random hash*) and assigned the default role `viewer`.
 
 ---
 
-##  3. Alur Autentikasi Tradisional (Lokal)
+## 3. Traditional (Local) Authentication Flow
 
-Pengelolaan autentikasi manual ditangani oleh `App\Http\Controllers\AuthController`:
+Standard credential management is handled by `App\Http\Controllers\AuthController`:
 
-### 3.1. Registrasi Akun (`/register`)
-- **Validasi Input**:
-  - `name`: Wajib, teks maksimal 255 karakter.
-  - `email`: Wajib, format email valid, unik di tabel `users`.
-  - `phone`: Wajib, format nomor telepon Indonesia (`08...` atau `+62...`).
-  - `password`: Wajib, minimal 8 karakter, harus sama dengan `password_confirmation`.
-- **Enkripsi**: Password di-hash menggunakan algoritma `Hash::make()` (Bcrypt).
-- **Default Role**: Akun baru otomatis memperoleh peran `viewer` dan status `is_active = true`.
+### 3.1. Account Registration (`/register`)
+- **Input Validation**:
+  - `name`: Required, max 255 characters.
+  - `email`: Required, valid email format, unique in `users` table.
+  - `phone`: Required, valid Indonesian telephone format (`08...` or `+62...`).
+  - `password`: Required, minimum 8 characters, must match `password_confirmation`.
+- **Encryption**: Passwords are securely hashed using `Hash::make()` (Bcrypt).
+- **Default Role**: New user accounts are automatically assigned the `viewer` role and `is_active = true`.
 
-### 3.2. Login Pengguna (`/login`)
-- **Pengecekan Kredensial**: `Auth::attempt(['email' => $email, 'password' => $password], $remember)`.
-- **Validasi Akun Aktif**: Jika `is_active === false`, login ditolak dan muncul pesan peringatan bahwa akun dinonaktifkan oleh administrator.
-- **Proteksi Session Fixation**: Menjalankan `$request->session()->regenerate()` setiap kali login berhasil untuk mencegah pencurian token sesi.
+### 3.2. User Login (`/login`)
+- **Credential Verification**: `Auth::attempt(['email' => $email, 'password' => $password], $remember)`.
+- **Active Account Check**: If `is_active === false`, login is rejected and an error alert is displayed stating that the account has been deactivated by an administrator.
+- **Session Fixation Prevention**: Calls `$request->session()->regenerate()` upon successful authentication to guard against session hijacking attacks.
 
-### 3.3. Logout Pengguna (`/logout`)
-- Menjalankan `Auth::logout()`.
-- Menghapus seluruh sesi aktif `$request->session()->invalidate()`.
-- Menghasilkan token CSRF baru `$request->session()->regenerateToken()` untuk keamanan berikutnya.
+### 3.3. User Logout (`/logout`)
+- Executes `Auth::logout()`.
+- Flushes the active session with `$request->session()->invalidate()`.
+- Regenerates the CSRF token with `$request->session()->regenerateToken()` for subsequent requests.
 
 ---
 
-##  4. Role-Based Access Control (RBAC)
+## 4. Role-Based Access Control (RBAC)
 
-Sistem menerapkan dua level hak akses (*Role*):
+The system enforces two distinct authorization levels (*Roles*):
 
-| Peran (Role) | Hak Akses Portal Publik | Hak Akses Dashboard Admin | Fitur Khusus |
+| Role | Public Portal Access | Admin Dashboard Access | Permissions & Capabilities |
 |---|:---:|:---:|---|
-| **`admin`** |  Ya |  Ya (`/admin/*`) | Akses penuh: Kelola profil BLUD, CRUD layanan, fasilitas, berita, struktur organigram, kelola akun pengguna, ubah role, dan audit log. |
-| **`viewer`**|  Ya |  Ditolak (403 Forbidden) | Mengakses portal informasi publik, membaca berita, melihat katalog layanan/fasilitas, dan mengirimkan pesan kontak. |
+| **`admin`** | Yes | Yes (`/admin/*`) | Full access: Manage institutional profile, CRUD for services, facilities, news, organigram structure, user management, role assignments, and activity audit logs. |
+| **`viewer`** | Yes | Denied (403 Forbidden) | Read public information, browse news articles, view service and facility catalogs, and submit contact inquiry messages. |
 
 ---
 
-##  5. Middleware & Proteksi Keamanan
+## 5. Middleware & Security Protection
 
 ### 5.1. `AdminMiddleware` (`app/Http/Middleware/AdminMiddleware.php`)
-Diterapkan pada grup route `/admin/*`. Memeriksa dua kondisi:
-1. **Autentikasi**: `Auth::check()` — Memastikan pengguna sudah login. Jika belum, dialihkan ke `/login`.
-2. **Otorisasi**: `Auth::user()->isAdmin()` — Memeriksa apakah kolom `role === 'admin'`. Jika bukan admin, sistem langsung menghentikan request dengan status `403 Forbidden`.
+Applied to the `/admin/*` route group. Validates two security layers:
+1. **Authentication**: `Auth::check()` — Ensures the user is authenticated. Unauthenticated visitors are redirected to `/login`.
+2. **Authorization**: `Auth::user()->isAdmin()` — Checks if the user's `role === 'admin'`. Non-admin accounts receive an immediate `403 Forbidden` response.
 
 ```php
 public function handle(Request $request, Closure $next)
@@ -124,20 +124,20 @@ public function handle(Request $request, Closure $next)
     }
 
     if (!Auth::user()->isAdmin()) {
-        abort(403, 'Anda tidak memiliki akses ke halaman admin.');
+        abort(403, 'You do not have access to the administration area.');
     }
 
     return $next($request);
 }
 ```
 
-### 5.2. Proteksi Admin Self-Delete
-Pada `UserController::destroy()`, sistem memvalidasi agar admin yang sedang login tidak dapat menghapus akunnya sendiri:
+### 5.2. Admin Self-Delete Prevention
+In `UserController::destroy()`, the system prevents the currently logged-in administrator from deleting their own account:
 ```php
 if ($user->id === Auth::id()) {
-    return back()->with('error', 'Anda tidak dapat menghapus akun Anda sendiri.');
+    return back()->with('error', 'You cannot delete your own account.');
 }
 ```
 
-### 5.3. Proteksi CSRF (Cross-Site Request Forgery)
-Seluruh request mutasi data (`POST`, `PUT`, `PATCH`, `DELETE`) dilindungi oleh token CSRF Laravel melalui direktif `@csrf` pada formulir HTML dan header `X-CSRF-TOKEN` pada pemanggilan AJAX/Fetch API.
+### 5.3. CSRF (Cross-Site Request Forgery) Protection
+All state-mutating HTTP requests (`POST`, `PUT`, `PATCH`, `DELETE`) are protected by Laravel's CSRF token system via the `@csrf` Blade directive in HTML forms and the `X-CSRF-TOKEN` header in AJAX/Fetch API requests.

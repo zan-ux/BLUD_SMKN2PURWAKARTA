@@ -1,25 +1,25 @@
-#  Dokumentasi Teknis BLUD SMKN 2 Purwakarta
+# BLUD SMKN 2 Purwakarta Technical Documentation
 
-Selamat datang di pusat dokumentasi teknis sistem informasi **BLUD SMKN 2 Purwakarta**. Dokumentasi ini disusun secara modular untuk mempermudah pengembang (*developer*), administrator sistem, dan pemangku kepentingan dalam memahami, mengelola, serta mengembangkan aplikasi ini.
+Welcome to the technical documentation hub for the **BLUD SMKN 2 Purwakarta** information system. This documentation is organized modularly to help developers, system administrators, and stakeholders understand, manage, and extend the application.
 
 ---
 
-##  Daftar Dokumen Teknis
+## Technical Documentation Directory
 
-Silakan pilih topik dokumentasi yang ingin dipelajari:
+Please select a documentation topic to explore:
 
-| No | Dokumen | Deskripsi Singkat | File Link |
+| No | Document | Overview | File Link |
 |:--:|:---|:---|:---|
-| 1 | **Database & Model** | Struktur basis data, skema tabel, relasi antar entitas, Model Eloquent, migrasi, dan data seeder. | [database.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/database.md) |
-| 2 | **API & Integrasi** | Integrasi API eksternal (Google OAuth 2.0, Google Maps) dan katalog REST/AJAX endpoint internal admin. | [api.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/api.md) |
-| 3 | **Autentikasi & Otorisasi** | Sistem login ganda (kredensial lokal & Google SSO), alur registrasi, RBAC (*admin* vs *viewer*), dan middleware keamanan. | [auth.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/auth.md) |
-| 4 | **Fitur & Spesifikasi** | Rincian fungsional seluruh halaman publik dan panel administrasi (CRUD, workflow konten, status interaktif). | [features.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/features.md) |
-| 5 | **Arsitektur Sistem** | Desain arsitektur MVC Laravel 13, frontend pipeline Vite + Tailwind CSS v4, struktur direktori, dan penanganan asset storage. | [architecture.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/architecture.md) |
-| 6 | **Setup & Panduan Instalasi** | Prasyarat sistem, langkah instalasi step-by-step, konfigurasi `.env`, setup Google Cloud Console OAuth, dan solusi troubleshooting. | [setup.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/setup.md) |
+| 1 | **Database & Models** | Database structure, table schemas, entity relationships (ERD), Eloquent Models, migrations, and seeders. | [database.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/database.md) |
+| 2 | **API & Integrations** | External API integrations (Google OAuth 2.0, Google Maps) and internal admin REST/AJAX endpoint catalog. | [api.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/api.md) |
+| 3 | **Authentication & Authorization** | Dual login mechanisms (local credentials & Google SSO), registration flow, RBAC (*admin* vs *viewer*), and security middleware. | [auth.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/auth.md) |
+| 4 | **Features & Specifications** | Functional breakdown of all public portal and admin panel features (CRUD, content workflow, interactive states). | [features.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/features.md) |
+| 5 | **System Architecture** | Laravel 13 MVC architectural design, Vite + Tailwind CSS v4 frontend pipeline, directory layout, and file storage management. | [architecture.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/architecture.md) |
+| 6 | **Setup & Installation Guide** | System prerequisites, step-by-step installation, `.env` configuration, Google Cloud Console OAuth setup, and troubleshooting solutions. | [setup.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/setup.md) |
 
 ---
 
-##  Ringkasan Arsitektur & Teknologi
+## Architecture & Technology Summary
 
 ```mermaid
 graph TD
@@ -33,16 +33,16 @@ graph TD
     WebServer --> Storage[File Storage / Symlink]
 ```
 
-###  Ringkasan Tech Stack
+### Tech Stack Summary
 - **Backend Framework**: Laravel 13 (PHP 8.3+)
 - **Database**: MySQL / MariaDB
 - **Frontend**: Blade Templating, Tailwind CSS v4, Vite 8, AOS (Animate On Scroll), SweetAlert2, FontAwesome 6
-- **Integrasi**: Google OAuth 2.0 API, Google Maps Embed API
-- **Autentikasi**: Laravel Session Auth & Google SSO OAuth 2.0
+- **Integrations**: Google OAuth 2.0 API, Google Maps Embed API
+- **Authentication**: Laravel Session Auth & Google SSO OAuth 2.0
 
 ---
 
-##  Navigasi Cepat
-- Kembali ke halaman utama proyek: [README.md (Utama)](file:///c:/Users/zanrp/BLUDSMEKDA/README.md)
-- Mulai instalasi aplikasi: [setup.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/setup.md)
-- Pelajari struktur database: [database.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/database.md)
+## Quick Navigation
+- Return to main project page: [README.md (Main)](file:///c:/Users/zanrp/BLUDSMEKDA/README.md)
+- Start application installation: [setup.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/setup.md)
+- Explore database structure: [database.md](file:///c:/Users/zanrp/BLUDSMEKDA/document/database.md)
