@@ -21,9 +21,6 @@
                 <button onclick="showTab('visi')" id="tab-visi" class="w-full flex items-center justify-between px-4 py-3 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 transition">
                     Visi & Misi
                 </button>
-                <button onclick="showTab('sambutan')" id="tab-sambutan" class="w-full flex items-center justify-between px-4 py-3 rounded-lg text-sm font-medium text-gray-600 hover:bg-gray-100 transition">
-                    Sambutan Kepala
-                </button>
             </div>
 
             <!-- Status Info -->
@@ -160,39 +157,6 @@
                     </div>
                 </div>
 
-<!-- Tab Sambutan Kepala -->
-<div id="content-sambutan" class="tab-content hidden">
-    <div class="space-y-6">
-        <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Nama Kepala Sekolah</label>
-            <input type="text" name="nama_kepala" value="{{ old('nama_kepala', $profile->nama_kepala) }}" class="w-full px-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:border-green-800 focus:ring-1 focus:ring-green-800">
-        </div>
-
-        <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Isi Sambutan</label>
-            <textarea name="sambutan" rows="6" class="w-full p-4 bg-gray-50 border border-gray-200 rounded-lg focus:outline-none focus:border-green-800 focus:ring-1 focus:ring-green-800">{{ old('sambutan', $profile->sambutan) }}</textarea>
-        </div>
-    </div>
-</div>
-                        <!-- Foto Sambutan Kepala Sekolah -->
-<div>
-    <label class="block text-sm font-medium text-gray-700 mb-2">Foto Kepala Sekolah</label>
-    <div class="flex items-start gap-6">
-        <div class="w-64 h-40 rounded-lg overflow-hidden bg-gray-100">
-            @if($profile->foto_sambutan)
-                <img src="{{ asset('storage/'.$profile->foto_sambutan) }}" alt="Foto Kepala Sekolah" class="w-full h-full object-cover">
-            @else
-                <div class="w-full h-full flex items-center justify-center text-gray-400">Foto belum ada</div>
-            @endif
-        </div>
-        <div class="flex-1">
-            <input type="file" name="foto_sambutan" accept="image/*" class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:text-sm file:font-semibold file:bg-gray-50 file:text-gray-700 hover:file:bg-gray-100">
-        </div>
-    </div>
-</div>
-                        </div>
-                    </div>
-                </div>
 
                 <!-- Logo Institusi (Selalu Tampil) -->
                 <div class="border-t border-gray-100 mt-6 pt-6">

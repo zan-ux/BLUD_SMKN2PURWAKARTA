@@ -84,36 +84,6 @@
     </div>
 </section>
 
-<!-- Sambutan Kepala Sekolah -->
-<section class="py-20 bg-white">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-gray-50 rounded-2xl p-8 lg:p-12 grid grid-cols-1 lg:grid-cols-3 gap-8 items-center" data-aos="fade-up">
-            <div class="lg:col-span-1">
-                <div class="w-full h-72 rounded-xl overflow-hidden shadow-lg">
-                    @if($profile->foto_sambutan)
-                        <img src="{{ asset('storage/'.$profile->foto_sambutan) }}" alt="Kepala Sekolah" class="w-full h-full object-cover">
-                    @else
-                        <div class="w-full h-full bg-green-100 flex items-center justify-center">
-                            <span class="text-6xl text-green-300">👨‍🏫</span>
-                        </div>
-                    @endif
-                </div>
-            </div>
-            <div class="lg:col-span-2">
-                <div class="text-sm font-semibold text-green-800 uppercase tracking-wider mb-4">Kepemimpinan</div>
-                <h3 class="text-2xl font-bold text-gray-900 mb-6">Sambutan Kepala Sekolah</h3>
-                <blockquote class="relative pl-6 border-l-4 border-green-800 mb-6">
-                    <p class="text-gray-600 italic leading-relaxed">
-                        "{{ $profile->sambutan ?? 'Belum ada sambutan kepala sekolah.' }}"
-                    </p>
-                </blockquote>
-                <div class="font-semibold text-gray-900">{{ $profile->nama_kepala ?? 'Nama Kepala Sekolah' }}</div>
-                <div class="text-sm text-gray-500">Kepala Sekolah</div>
-            </div>
-        </div>
-    </div>
-</section>
-
 <!-- Legalitas & Akreditasi -->
 <section class="py-20 bg-gray-50">
     <div class="container mx-auto px-4 sm:px-6 lg:px-8">
